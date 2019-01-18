@@ -1,0 +1,31 @@
+.event-list-search{
+    max-width: 400px;
+    width: 100%;
+  }
+  
+.event-list{
+    height: 300px;
+    width: 100%;
+    max-width: 400px;
+    align-self: center;
+    overflow-y: auto;
+    position: relative;
+    background: #3f51b5ab;
+  }
+  
+.event-list-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .event-list-header{
+    position: relative;
+    margin: 0;
+    align-self: center;
+    z-index: 3;
+    top: -20px;
+  }

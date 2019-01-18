@@ -1,0 +1,56 @@
+.navbar{
+    height: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    position: absolute;
+    background: #000000;
+    opacity: 0.6;
+    justify-content: flex-end;
+  }
+  .add-event{
+    cursor: pointer;
+    width: 40px;
+    font-size: 32px;
+    text-align: center;
+    color: white;
+    background: #26bd26;
+  }
+  .profile{
+    padding-left: 20px;
+  }
+  
+  .profile-name{
+    font-size: 20px;
+    line-height: 65px;
+  }
+  
+  .profile-img{
+    width:40px;
+    height: 40px;
+    display: inline-block;
+    background: cadetblue;
+  }
+  
+  .burger{
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .burger>span{
+    height: 3px;
+    width: 30px;
+    margin: 5px 0;
+    background: white
+  }
+  
+  .registrate-button{
+    padding: 10px;
+    align-self: flex-end;
+    background: #f4f5f7;
+    border-radius: 3px;
+    border: none;
+  }
