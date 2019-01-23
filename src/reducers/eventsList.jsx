@@ -1,4 +1,4 @@
-export default function eventList(state = "null", action) {
+export default function eventList(state = "", action) {
     switch (action.type) {
         case "ADD_EVENTITEM":
             return { state: action.payload };

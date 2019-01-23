@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import EventListItem from '../EventListItem/EventListItem'
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { getDataFromDb } from '../../actions/currentEventListAction';
 import { needRefresh } from '../../../../actions/isRefreshAction';
-import './EventList.css'
+
+import mainStyles from './EventList.css'
 
 
 class EventList extends Component {
@@ -32,16 +35,18 @@ class EventList extends Component {
     }
 
     render() {
+        const getVisibleItems = this.getVisibleItems(this.props.eventList || [], this.state.searchQuery, this.selectedEventToggle(), this.props.needRefresh);
+
         return (
-            <div className="event-list-container">
-                <h2 className="event-list-header">Event List</h2>
-                <input className="default-input event-list-search shadow" type="search" placeholder="Search" onChange={this.handleSearch} />
-                <ul className="event-list shadow">
-                    {this.getVisibleItems(this.props.eventList || [], this.state.searchQuery, this.selectedEventToggle(), this.props.needRefresh).map(elem => (
+            <div className={mainStyles.eventListContainer}>
+                <h2 className={mainStyles.eventListHeader}>Event List</h2>
+                <input className={"default-input " + mainStyles.eventListSearch + " shadow"} type="search" placeholder="Search" onChange={this.handleSearch} />
+                <ul className={mainStyles.eventList + " shadow"}>
+                    {getVisibleItems.map(elem => (
                         <EventListItem event={elem} key={elem._id} />
                     ))}
                 </ul>
-                <span className="viewAll" onClick={this.refresh}>Refresh</span>
+                <span className={mainStyles.viewAll} onClick={this.refresh}>Refresh</span>
             </div>
         );
     }
@@ -93,6 +98,8 @@ class EventList extends Component {
     /*-----------END CUSTOM METHODS-----------*/
 }
 
+
+
 const mapDispatchToProps = dispatch => {
     return {
         asyncGetEvents: () => {
@@ -109,6 +116,12 @@ const mapStateToProps = state => {
         eventList: state.eventList.state,
         needRefresh: state.needRefresh
     }
+}
+
+EventList.propTypes = {
+    EventList: PropTypes.func,
+    needRefresh: PropTypes.bool,
+    needUpdate: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);

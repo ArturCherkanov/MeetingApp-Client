@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LoginForm from '../../../../components/LoginForm/loginForm';
-import './Registration.css';
-import {addUserToDB} from '../../../../api/api'
 
-class Registation extends Component {
+import LoginForm from '../../../../components/LoginForm/loginForm';
+import {addUserToDB} from '../../../../api/index'
+
+import mainStyles from './Registration.css';
+
+class RegistrationContainer extends Component {
 
     render() {
         return (
-            <div className="main-page">
+            <div className="main-content">
                 <div className="container">
-                    <div className="registration-container">
+                    <div className={mainStyles.formContainer}>
                         <h1 className="d-block">Registration</h1>
                         <LoginForm buttonName={'Registration'} submitFunction={this.createUser}  />
                     </div>
@@ -30,4 +32,4 @@ class Registation extends Component {
     
 }
 
-export default connect()(Registation);
+export default connect()(RegistrationContainer);

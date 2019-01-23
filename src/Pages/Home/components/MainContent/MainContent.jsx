@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
-import Navbar from '../../../../components/Navbar/Navbar.js';
-import AddNewEvent from '../../../../components/AddNewEvent/AddNewEvent';
-import EventList from '../EventList/EventList.js';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import './Calendar.css';
-import './MainContent.css';
+
+import Navbar from '../../../../components/Navbar/Navbar';
+import AddNewEvent from '../../../../components/AddNewEvent/AddNewEvent';
+import EventList from '../EventList/EventList';
 import { modalAction } from '../../../../actions/modalAction'
+
+import './Calendar.css';
+import mainStyles from './MainContent.css';
 
 class MainContent extends Component {
   constructor(props) {
@@ -20,7 +22,7 @@ class MainContent extends Component {
   }
 
   activateWindow = (e) => {
-    this.props.setModalStateFunction("active")
+    this.props.setModalStateFunction(true)
   }
 
   closeWindow = (test) => {
@@ -51,15 +53,15 @@ class MainContent extends Component {
 
   render() {
     return (
-      <div className="main-page">
+      <div className='main-content'>
         <Navbar />
         <div className="container">
-          <div className="main-content">
+          <div className={mainStyles.mainContent}>
             <div className="calendar-container">
               <Calendar onClickDay={(value) => {this.sortEventsBySelectedDate(value)}} />
-              <button className="addNewEvent-create-button shadow" onClick={this.activateWindow}>Create</button>
+              <button className={mainStyles.addNewEventCreateButton +' shadow'} onClick={this.activateWindow}>Create</button>
             </div>
-            <EventList handleSearch={this.handleSearch} chosenEventOnCaledar={this.state.eventList} />
+            <EventList handleSearch={this.handleSearch} chosenEventOnCaledar={this.state.eventList } />
           </div>
         </div>
         <AddNewEvent AddNewEventToDB={this.AddNewEventToDB} />

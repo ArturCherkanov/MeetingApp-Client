@@ -1,5 +1,5 @@
 const initialState = {
-    modalState: 'disabled'
+    modalState: false
 }
 
 export default function modalView(state = initialState, action) {

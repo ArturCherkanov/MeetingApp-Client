@@ -1,4 +1,4 @@
-.event-item{
+:local(.eventItem){
     padding-left: 20px;
     line-height: 40px;
     font-size: 15px;

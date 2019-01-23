@@ -1,4 +1,4 @@
-import { getEvents,putEvent } from '../api/api'
+import { getEvents,putEvent } from '../api/index'
 
 
 export const addeventItem = (currentEventList) => ({

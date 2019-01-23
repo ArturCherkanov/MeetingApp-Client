@@ -10,6 +10,13 @@
   display: block;
 }
 
+.main-content{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: #b1c7e8;
+}
+
 .default-input{
   margin-bottom: 20px;
   padding: 10px;
@@ -22,7 +29,6 @@
   background:#b1c7e8;
 }
 
-/* Main Page */
 .container{
   box-sizing:border-box;
   max-width: 992px;

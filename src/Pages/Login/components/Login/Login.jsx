@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LoginForm from '../../../../components/LoginForm/loginForm';
-import { addUserToDB } from '../../../../api/api'
 
+import LoginForm from '../../../../components/LoginForm/loginForm';
+import { addUserToDB } from '../../../../api/index'
+
+import mainStyles from './Login.css'
 
 class Registation extends Component {
     constructor(props) {
@@ -14,9 +16,9 @@ class Registation extends Component {
     }
     render() {
         return (
-            <div className="main-page">
+            <div className="main-content">
                 <div className="container">
-                    <div className="registration-container">
+                    <div className={mainStyles.formContainer}>
                         <h1 className="d-block">Login</h1>
                         <LoginForm buttonName={'Login'} submitFunction={this.findUser} />
                     </div>
@@ -28,9 +30,7 @@ class Registation extends Component {
 
     findUser = (e, username, password) => {
         e.preventDefault();
-        addUserToDB.then((resolve) => {
-        }).catch(function (error) {
-        });
+        
     }
 
     /*-----------END СUSTOM METHODS-----------*/

@@ -4,6 +4,9 @@ import { modalAction } from '../../actions/modalAction';
 import { needRefresh } from '../../actions/isRefreshAction';
 import { addDataToDb } from '../../actions/addEventItemAction';
 
+
+// Need to split by components 
+
 import './AddNewEvent.css'
 
 class AddNewEvent extends Component {
@@ -18,7 +21,7 @@ class AddNewEvent extends Component {
 
     render() {
         return (
-            <div className={"addNewEvent " + this.props.active}>
+            <div className={"addNewEvent " + (this.props.active? ' active': ' disabled')}>
                 <form className="addNewEvent-form">
                     <div className="addNewEvent-form-container">
                         <label className="addNEwEvent-Label">
@@ -50,7 +53,7 @@ class AddNewEvent extends Component {
                             </select>
                         </label>
                         <div className="addNEwEvent-button-container">
-                            <button className="addNewEvent-create-button" onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction("disabled"); this.props.addEvent(this.state.message, this.state.time) }}>CREATE</button>
+                            <button className="addNewEvent-create-button" onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction(false); this.props.addEvent(this.state.message, this.state.time) }}>CREATE</button>
                             <button className="addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
                         </div>
                     </div>
@@ -64,7 +67,7 @@ class AddNewEvent extends Component {
 
     modalClose = (e) => {
         e.preventDefault();
-        this.props.setModalStateFunction("disabled")
+        this.props.setModalStateFunction(false)
     }
 
     /*-----------END CUSTOM METHODS-----------*/

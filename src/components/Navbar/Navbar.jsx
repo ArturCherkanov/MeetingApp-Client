@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import './Navbar.css';
-
 import { connect } from 'react-redux';
+
 import { modalAction } from '../../actions/modalAction'
+
+import mainStyles from'./Navbar.css';
 
 
 class Navbar extends Component {
   render() {
-    return <div className="navbar">
-      <div className="add-event" onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction('active') }}>+</div>
-      <div className="profile">
-        <span className="profile-img"></span>
+    return <div className={mainStyles.navbar}>
+      <div className={mainStyles.addEvent} onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction(true) }}>+</div>
+      <div className={mainStyles.profile}>
+        <span className={mainStyles.profileImg}></span>
       </div>
     </div>
   }
