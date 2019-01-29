@@ -37,9 +37,3 @@
   margin: 0 auto;
   padding: 0 15px;
 }
-
-.event-list::-webkit-scrollbar { width: 0; }
-
-.event-list { -ms-overflow-style: none; }
-
-.event-list { overflow: -moz-scrollbars-none;}

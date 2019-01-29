@@ -40,7 +40,7 @@ class MainContent extends Component {
     let newArrayWithEvents = [],
       selectedDate = date.toLocaleString().replace(/,.*$/, "");
     this.props.eventList.filter(event => {
-      let dataParse = moment(event.time.replace(/T.*$/, "").replace(/-/g, "/")).format("MM/DD/YYYY");
+      let dataParse = moment(event.time,"YYYY-MM-DDTHH:mm:ss.SSS" ).format("M/DD/YYYY");
       if (event.time && dataParse == selectedDate) {
         newArrayWithEvents.push(event);
       }

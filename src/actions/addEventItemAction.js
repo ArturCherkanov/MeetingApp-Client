@@ -7,8 +7,7 @@ export const addeventItem = (currentEventList) => ({
 });
 
 export const addDataToDb = (message, time) => dispatch => {
-    putEvent()
-        .then(() => getEvents()
+    putEvent(message, time).then(() => getEvents()
             .then(res => res.data.data)
             .then(res => { dispatch(addeventItem(res)) }))
 }

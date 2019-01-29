@@ -6,7 +6,6 @@ import { addDataToDb } from '../../actions/addEventItemAction';
 
 
 // Need to split by components 
-
 import './AddNewEvent.css'
 
 class AddNewEvent extends Component {

@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import Paths from './paths'
+
+
 export const addUserToDB = (username, password) => {
     axios.post('/api/create', {
         username: username,
@@ -7,15 +10,15 @@ export const addUserToDB = (username, password) => {
     });
 }
 
-export const putEvent = (message, time) => {
-    axios.post('/api/putData', {
+export const putEvent = (message, time) => (
+ axios.post('/api/events/putData', {
         message: message,
         time: time
     })
-}
+)
 
 export const getEvents = () =>
-    axios.get("/api/getData");
+    axios.get("/api/events/get");
 
 export const findUserInDB = (username, password) => {
     axios.get('/api/login', {

@@ -7,6 +7,7 @@
     "dist": "^0.1.2",
     "jquery-ui": "^1.12.1",
     "moment": "^2.22.2",
+    "node-sass": "^4.11.0",
     "react": "^16.6.3",
     "react-calendar": "^2.17.5",
     "react-dom": "^16.6.3",
@@ -24,6 +25,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
+  
   "eslintConfig": {
     "extends": "react-app"
   },

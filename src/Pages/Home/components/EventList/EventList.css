@@ -11,6 +11,8 @@
     overflow-y: auto;
     position: relative;
     background: #3f51b5ab;
+    -ms-overflow-style: none; 
+    overflow: -moz-scrollbars-none;
   }
   
 :local(.eventListContainer){
@@ -45,3 +47,7 @@
     }
   
     /* End Refresh Button */
+
+  :local(.eventList)::-webkit-scrollbar { width: 0; }
+
+ 
