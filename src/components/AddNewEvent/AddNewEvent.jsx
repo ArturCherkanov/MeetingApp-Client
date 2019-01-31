@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { modalAction } from '../../actions/modalAction';
-import { needRefresh } from '../../actions/isRefreshAction';
+import { refresh } from '../../actions/isRefreshAction';
 import { addDataToDb } from '../../actions/addEventItemAction';
 
 
@@ -19,6 +19,8 @@ class AddNewEvent extends Component {
     }
 
     render() {
+        const handleRequest = e => {e.preventDefault(); this.props.setModalStateFunction(false); this.props.addEvent(this.state.message, this.state.time)};
+        
         return (
             <div className={"addNewEvent " + (this.props.active? ' active': ' disabled')}>
                 <form className="addNewEvent-form">
@@ -52,7 +54,7 @@ class AddNewEvent extends Component {
                             </select>
                         </label>
                         <div className="addNEwEvent-button-container">
-                            <button className="addNewEvent-create-button" onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction(false); this.props.addEvent(this.state.message, this.state.time) }}>CREATE</button>
+                            <button className="addNewEvent-create-button" onClick={(e) => { handleRequest(e) }}>CREATE</button>
                             <button className="addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
                         </div>
                     </div>
@@ -78,8 +80,8 @@ const mapDispatchToProps = (dispatch) => {
         setModalStateFunction: state => {
             dispatch(modalAction(state))
         },
-        needUpdate: state => {
-            dispatch(needRefresh(state))
+        update: state => {
+            dispatch(refresh(state))
         },
         addEvent: (message, time) => {
             dispatch(addDataToDb(message, time))
@@ -90,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         active: state.modalView.modalState,
-        needRefresh: state.needRefresh
+        refresh: state.refresh
     };
 }
 

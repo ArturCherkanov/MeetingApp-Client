@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { getDataFromDb } from '../../actions/currentEventListAction';
-import { needRefresh } from '../../../../actions/isRefreshAction';
+import { refresh } from '../../../../actions/isRefreshAction';
 
 import mainStyles from './EventList.css'
 
@@ -22,10 +22,10 @@ class EventList extends Component {
         // Reset selected date 
 
         if (next.chosenEventOnCaledar !== this.props.chosenEventOnCaledar && next.chosenEventOnCaledar != null) {
-            this.props.needUpdate(false);
+            this.props.update(false);
         }
 
-        if (next.needRefresh !== this.props.needRefresh && next.needRefresh) {
+        if (next.refresh !== this.props.refresh && next.refresh) {
             this.refresh()
         }
     }
@@ -35,12 +35,12 @@ class EventList extends Component {
     }
 
     render() {
-        const getVisibleItems = this.getVisibleItems(this.props.eventList || [], this.state.searchQuery, this.selectedEventToggle(), this.props.needRefresh);
+        const getVisibleItems = this.getVisibleItems(this.props.eventList || [], this.state.searchQuery, this.selectedEventToggle(), this.props.refresh);
 
         return (
             <div className={mainStyles.eventListContainer}>
                 <h2 className={mainStyles.eventListHeader}>Event List</h2>
-                <input className={"default-input " + mainStyles.eventListSearch + " shadow"} type="search" placeholder="Search" onChange={this.handleSearch} />
+                <input className={"default-input " + mainStyles.eventListSearch + " shadow"} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
                 <ul className={mainStyles.eventList + " shadow"}>
                     {getVisibleItems.map(elem => (
                         <EventListItem event={elem} key={elem._id} />
@@ -57,7 +57,7 @@ class EventList extends Component {
 
         // selected date will refreshed straight after refresh
 
-        if (!this.props.needRefresh) {
+        if (!this.props.refresh) {
             return this.props.chosenEventOnCaledar
         } else {
             return null
@@ -68,7 +68,7 @@ class EventList extends Component {
 
         // setting flag and getting data after refresh
 
-        this.props.needUpdate(true);
+        this.props.update(true);
         this.props.asyncGetEvents();
     }
 
@@ -88,7 +88,7 @@ class EventList extends Component {
         return list.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
     }
 
-    handleSearch = (e) => {
+    handleSearchInputChange = (e) => {
         e.preventDefault();
         this.setState({
             searchQuery: e.target.value.trim(),
@@ -105,8 +105,8 @@ const mapDispatchToProps = dispatch => {
         asyncGetEvents: () => {
             dispatch(getDataFromDb())
         },
-        needUpdate: state => {
-            dispatch(needRefresh(state))
+        update: state => {
+            dispatch(refresh(state))
         }
     }
 }
@@ -114,14 +114,14 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         eventList: state.eventList.state,
-        needRefresh: state.needRefresh
+        refresh: state.refresh
     }
 }
 
 EventList.propTypes = {
     EventList: PropTypes.func,
-    needRefresh: PropTypes.bool,
-    needUpdate: PropTypes.func,
+    refresh: PropTypes.bool,
+    update: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);
