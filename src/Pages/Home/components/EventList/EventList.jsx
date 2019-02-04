@@ -42,7 +42,7 @@ class EventList extends Component {
                 <h2 className={mainStyles.eventListHeader}>Event List</h2>
                 <input className={"default-input " + mainStyles.eventListSearch + " shadow"} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
                 <ul className={mainStyles.eventList  + " shadow"}>
-                    {visibleItems[0]&&visibleItems[0].map(elem => (
+                    {visibleItems&&visibleItems.map(elem => (
                         <EventListItem event={elem} key={elem._id} />
                     ))}
                 </ul>
@@ -79,13 +79,13 @@ class EventList extends Component {
         let searchQuery = search.toLowerCase();
 
         if ((!searchQuery && !selectedDate) || (!searchQuery && !selectedDate && refreshed)) {
-            return list;
+            return list[0];
         } else if (!search && selectedDate) {
             return selectedDate;
         } else if (search && selectedDate) {
             return selectedDate.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
         }
-        return list.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        return list[0].filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
     }
 
     handleSearchInputChange = (e) => {
