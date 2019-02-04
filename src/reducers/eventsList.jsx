@@ -1,9 +1,20 @@
-export default function eventList(state = "", action) {
+const initialState = {
+    events: [],
+    isLoading: false,
+};
+
+export default function eventList(state=initialState, action) {
     switch (action.type) {
-        case "ADD_EVENTITEM":
-            return { state: action.payload };
+        case "ADD_EVENTITEM_SUCCESS":
+            return {
+                ...state,
+                events: [...state.events, action.payload],
+            };
         case "SET_EVENTLIST":
-            return { state: action.payload }
+            return {  
+                ...state,
+                events: [...state.events, action.payload],
+            }
         default:
             return state;
     }

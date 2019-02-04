@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import LoginForm from '../../../../components/LoginForm/loginForm';
-import {addUserToDB} from '../../../../api/index'
+import LoginForm from '../../../../components/LoginForm/LoginForm';
+import {addUserToDB} from '../../../../api/'
 
 import mainStyles from './Registration.css';
 

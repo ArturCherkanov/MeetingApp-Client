@@ -21,28 +21,28 @@ class EventList extends Component {
 
         // Reset selected date 
 
-        if (next.chosenEventOnCaledar !== this.props.chosenEventOnCaledar && next.chosenEventOnCaledar != null) {
-            this.props.update(false);
-        }
+        // if (next.chosenEventOnCaledar !== this.props.chosenEventOnCaledar && next.chosenEventOnCaledar != null) {
+        //     this.props.update(false);
+        // }
 
-        if (next.refresh !== this.props.refresh && next.refresh) {
-            this.refresh()
-        }
+        // if (next.refresh !== this.props.refresh && next.refresh) {
+        //     this.refresh()
+        // }
     }
 
     componentWillMount() {
-        this.props.asyncGetEvents();
+        this.props.getDataFromDb();
     }
-
+    
     render() {
-        const getVisibleItems = this.getVisibleItems(this.props.eventList || [], this.state.searchQuery, this.selectedEventToggle(), this.props.refresh);
+        const visibleItems = this.getVisibleItems(this.props.eventList.events, this.state.searchQuery, this.selectedEventToggle(), this.props.refresh);
 
         return (
             <div className={mainStyles.eventListContainer}>
                 <h2 className={mainStyles.eventListHeader}>Event List</h2>
                 <input className={"default-input " + mainStyles.eventListSearch + " shadow"} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
-                <ul className={mainStyles.eventList + " shadow"}>
-                    {getVisibleItems.map(elem => (
+                <ul className={mainStyles.eventList  + " shadow"}>
+                    {visibleItems[0]&&visibleItems[0].map(elem => (
                         <EventListItem event={elem} key={elem._id} />
                     ))}
                 </ul>
@@ -69,7 +69,7 @@ class EventList extends Component {
         // setting flag and getting data after refresh
 
         this.props.update(true);
-        this.props.asyncGetEvents();
+        this.props.getDataFromDb();
     }
 
     // function for computing current events by different queries
@@ -102,7 +102,7 @@ class EventList extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        asyncGetEvents: () => {
+        getDataFromDb: () => {
             dispatch(getDataFromDb())
         },
         update: state => {
@@ -113,7 +113,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        eventList: state.eventList.state,
+        eventList: state.eventList,
         refresh: state.refresh
     }
 }

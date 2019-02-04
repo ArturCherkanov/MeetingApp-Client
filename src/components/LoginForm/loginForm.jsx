@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import validator from 'validator';
+import { required, email } from '../../utils/validation'
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import Button from 'react-validation/build/button';
@@ -16,7 +17,7 @@ class LoginForm extends Component {
     }
     render() {
         return (
-            <Form className="registrate-form" onSubmit={e=>this.props.submitFunction(e, this.state.username, this.state.password)}>
+            <Form className="registrate-form" onSubmit={e => this.props.submitFunction(e, this.state.username, this.state.password)}>
                 <label htmlFor="email">Name</label>
                 <Input id="email" className="default-input" value={this.state.username} onChange={e => this.setState({ username: e.target.value })} validations={[required, email]} name="username" />
                 <label htmlFor="password">Password</label>
@@ -26,22 +27,5 @@ class LoginForm extends Component {
         );
     }
 }
-
-/*-----------VALIDATION-----------*/
-
-const required = (value) => {
-    if (!value.toString().trim().length) {
-        // We can return string or jsx as the 'error' prop for the validated Component
-        return <div className="error-message">require</div>;
-    }
-};
-
-const email = (value) => {
-    if (!validator.isEmail(value)) {
-        return <div className="error-message">{value} is not a valid email.</div>
-    }
-};
-
-/*-----------END VALIDATION-----------*/
 
 export default connect()(LoginForm);

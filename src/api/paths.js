@@ -1,5 +1,5 @@
     // API
-    export const API_PATH = '/api/'
+    export const API_PATH = '/api'
     
     // Events
     export const EVENTS_PATH = '/events/';
