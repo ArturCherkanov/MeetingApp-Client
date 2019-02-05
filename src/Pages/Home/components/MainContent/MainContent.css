@@ -1,0 +1,22 @@
+/* General Styles */
+  
+  :local(.mainContent){
+    display: flex;
+    padding-top: 85px;
+    justify-content: space-around;
+  }
+
+/* End General Styles */
+
+/* Button 'Create' */
+
+:local(.addNewEventCreateButton){
+    align-self: center;
+    padding: 10px;
+    background: #42ca9d;
+    border-radius: 3px;
+    border: none;
+    color: white;
+  }
+
+  /* End Button 'Create' */
