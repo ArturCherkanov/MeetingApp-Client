@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import validator from 'validator';
-import { required, email } from '../../utils/validation'
+import PropTypes from 'prop-types';
+
+import { required, email } from '../../utils/validation';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import Button from 'react-validation/build/button';
-import './LoginForm.css'
+import './LoginForm.css';
 
 class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password: ''
-        }
+            password: '',
+        };
     }
     render() {
         return (
@@ -27,5 +28,10 @@ class LoginForm extends Component {
         );
     }
 }
+
+LoginForm.propTypes = {
+    submitFunction: PropTypes.func,
+    buttonName: PropTypes.string,
+};
 
 export default connect()(LoginForm);

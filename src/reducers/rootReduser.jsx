@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 import modalView from './modalAppearance';
 import eventList from './eventsList';
@@ -9,6 +9,6 @@ const rootReducer = combineReducers({
     modalView,
     eventList,
     refresh,
-})
+});
 
 export default rootReducer;

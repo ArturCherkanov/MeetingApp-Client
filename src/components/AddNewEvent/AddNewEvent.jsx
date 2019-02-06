@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { modalAction } from '../../actions/modalAction';
 import { refresh } from '../../actions/isRefreshAction';
 import { addDataToDb } from '../../actions/addEventItemAction';
 
 
-// Need to split by components 
-import './AddNewEvent.css'
+// Need to split by components
+import './AddNewEvent.css';
 
 class AddNewEvent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            message: "",
-            time: "",
-        }
+            message: '',
+            time: '',
+        };
     }
 
     render() {
-        const handleRequest = e => {e.preventDefault(); this.props.setModalStateFunction(false); this.props.addEvent(this.state.message, this.state.time)};
-        
+        const handleRequest = e => { e.preventDefault(); this.props.setModalStateFunction(false); this.props.addEvent(this.state.message, this.state.time); };
+
         return (
-            <div className={"addNewEvent " + (this.props.active? ' active': ' disabled')}>
+            <div className={'addNewEvent ' + (this.props.active ? ' active' : ' disabled')}>
                 <form className="addNewEvent-form">
                     <div className="addNewEvent-form-container">
                         <label className="addNEwEvent-Label">
@@ -54,7 +55,7 @@ class AddNewEvent extends Component {
                             </select>
                         </label>
                         <div className="addNEwEvent-button-container">
-                            <button className="addNewEvent-create-button" onClick={(e) => { handleRequest(e) }}>CREATE</button>
+                            <button className="addNewEvent-create-button" onClick={(e) => { handleRequest(e); }}>CREATE</button>
                             <button className="addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
                         </div>
                     </div>
@@ -68,32 +69,34 @@ class AddNewEvent extends Component {
 
     modalClose = (e) => {
         e.preventDefault();
-        this.props.setModalStateFunction(false)
+        this.props.setModalStateFunction(false);
     }
 
     /*-----------END CUSTOM METHODS-----------*/
 
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setModalStateFunction: state => {
-            dispatch(modalAction(state))
-        },
-        update: state => {
-            dispatch(refresh(state))
-        },
-        addEvent: (message, time) => {
-            dispatch(addDataToDb(message, time))
-        }
-    }
-}
+AddNewEvent.propTypes = {
+    setModalStateFunction: PropTypes.func,
+    active: PropTypes.string,
+    addEvent: PropTypes.func,
+};
 
-const mapStateToProps = (state) => {
-    return {
-        active: state.modalView.modalState,
-        refresh: state.refresh
-    };
-}
+const mapDispatchToProps = (dispatch) => ({
+    setModalStateFunction: state => {
+        dispatch(modalAction(state));
+    },
+    update: state => {
+        dispatch(refresh(state));
+    },
+    addEvent: (message, time) => {
+        dispatch(addDataToDb(message, time));
+    },
+});
+
+const mapStateToProps = (state) => ({
+    active: state.modalView.modalState,
+    refresh: state.refresh,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewEvent);

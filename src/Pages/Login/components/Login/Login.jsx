@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import LoginForm from '../../../../components/LoginForm/LoginForm';
-import { addUserToDB } from '../../../../api/'
+// import { addUserToDB } from '../../../../api/';
 
-import mainStyles from './Login.css'
+import mainStyles from './Login.css';
 
 class Registation extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password: ''
-        }
+            password: '',
+        };
     }
     render() {
         return (
@@ -28,9 +28,8 @@ class Registation extends Component {
     }
     /*-----------СUSTOM METHODS-----------*/
 
-    findUser = (e, username, password) => {
+    findUser = (e) => {
         e.preventDefault();
-        
     }
 
     /*-----------END СUSTOM METHODS-----------*/
