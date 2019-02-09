@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import LoginForm from '../../../../components/LoginForm/LoginForm';
-// import { addUserToDB } from '../../../../api/';
+import { findUserInDB } from '../../../../api/';
 
 import mainStyles from './Login.css';
+import LoginPage from '../..';
 
 class Registation extends Component {
     constructor(props) {
@@ -28,11 +30,19 @@ class Registation extends Component {
     }
     /*-----------СUSTOM METHODS-----------*/
 
-    findUser = (e) => {
+    findUser = (e, username, password) => {
         e.preventDefault();
+        findUserInDB(username, password)
+            .then(res => localStorage.setItem('token', res.data.token))
+            .then(this.props.history.push('/'));
     }
 
     /*-----------END СUSTOM METHODS-----------*/
 }
+
+Registation.propTypes = {
+    history: PropTypes.object,
+};
+
 
 export default connect()(Registation);
