@@ -1,36 +1,39 @@
 import axios from 'axios';
+import { post, get } from './utils';
 
-import { API_PATH, EVENTS_PATH, USERS_PATH } from './paths'
+import { API_PATH, EVENTS_PATH, USERS_PATH } from './paths';
 
 // Users
 
 export const addUserToDB = (username, password) => (
-    axios.post(API_PATH + USERS_PATH, {
+    post(API_PATH + USERS_PATH, false, {
         username: username,
-        password: password
+        password: password,
     })
-)
+);
 
 export const findUserInDB = (username, password) => (
-    axios.get(API_PATH + USERS_PATH, {
+    get(API_PATH + USERS_PATH, false, {
         params: {
             username: username,
-            password: password
-        }
+            password: password,
+        },
     })
-)
+);
 
 // Events
 
 export const putEvent = (message, time) => (
-    axios.post(API_PATH + EVENTS_PATH, {
+    post(API_PATH + EVENTS_PATH, true, {
         message: message,
-        time: time
+        time: time,
     })
-)
+);
 
 export const getEvents = () => (
-    axios.get(API_PATH + EVENTS_PATH)
-)
+    get(API_PATH + EVENTS_PATH, false, null)
+);
 
+export const getToken = () => {
 
+}
