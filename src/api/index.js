@@ -1,7 +1,12 @@
-import axios from 'axios';
 import { post, get } from './utils';
 
-import { API_PATH, EVENTS_PATH, USERS_PATH } from './paths';
+import {
+    API_PATH,
+    EVENTS_PATH,
+    USERS_PATH,
+    TOKEN_PATH,
+    LOGOUT_PATH,
+} from './paths';
 
 // Users
 
@@ -23,17 +28,26 @@ export const findUserInDB = (username, password) => (
 
 // Events
 
-export const putEvent = (message, time) => (
+export const putEvent = (message, time, isAsyncLoadEvents) => (
     post(API_PATH + EVENTS_PATH, true, {
         message: message,
         time: time,
+        isAsyncLoadEvents: isAsyncLoadEvents,
     })
 );
 
-export const getEvents = () => (
-    get(API_PATH + EVENTS_PATH, false, null)
+export const getEvents = (date) => (
+    get(API_PATH + EVENTS_PATH, false, {
+        params: {
+            date: date,
+        },
+    })
 );
 
-export const getToken = () => {
+export const getToken = () => (
+    get(API_PATH + TOKEN_PATH, true, null)
+);
 
-}
+export const logout = () => (
+    get(API_PATH + USERS_PATH + LOGOUT_PATH, true, null)
+);
