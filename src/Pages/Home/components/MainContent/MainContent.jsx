@@ -4,10 +4,12 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Navbar from '../../../../components/Navbar/Navbar';
+import Navbar from '../../../../components/Navbar/';
 import AddNewEvent from '../../../../components/AddNewEvent/AddNewEvent';
 import EventList from '../EventList/EventList';
 import { modalAction } from '../../../../actions/modalAction';
+import { isToken } from '../../../../actions/isTokenAction';
+import { getDataFromDb } from '../../actions/currentEventListAction'
 
 import './Calendar.css';
 import mainStyles from './MainContent.css';
@@ -18,8 +20,11 @@ class MainContent extends Component {
         this.state = {
             data: [],
             eventList: this.data,
-            selectedDate: '',
         };
+    }
+
+    UNSAFE_componentWillMount() {
+        this.props.checkTokenFunction();
     }
 
     activateWindow = () => {
@@ -40,6 +45,7 @@ class MainContent extends Component {
     sortEventsBySelectedDate = (date) => {
         let newArrayWithEvents = [],
             selectedDate = date.toLocaleString().replace(/,.*$/, '');
+        // console.log(moment().format('M/DD/YYYY'));
         this.props.eventList.forEach(event => {
             let dataParse = moment(event.time).format('M/DD/YYYY');
             if (event.time && dataParse == selectedDate) {
@@ -51,21 +57,29 @@ class MainContent extends Component {
             eventList: newArrayWithEvents,
         });
     }
-
+    fetchEvents = (date) => {
+        let selectedDate = moment(date.toString()).format(('YYYY-MM-DD'))
+        if (!this.props.eventList[selectedDate]) {
+            this.props.getEventsByDate(date)
+        }
+    }
     render() {
+        const addNewEventCreateButton = () => this.props.isToken ?
+            (<button className={mainStyles.addNewEventCreateButton + ' shadow'} onClick={this.activateWindow}>Create</button>) :
+            (null);
         return (
             <div className='main-content'>
                 <Navbar />
                 <div className="container">
                     <div className={mainStyles.mainContent}>
                         <div className="calendar-container">
-                            <Calendar onClickDay={(value) => { this.sortEventsBySelectedDate(value); }} />
-                            <button className={mainStyles.addNewEventCreateButton + ' shadow'} onClick={this.activateWindow}>Create</button>
+                            <Calendar onClickDay={(value) => { this.setState({ selectedDate: value }); this.fetchEvents(value); }} />
+                            {addNewEventCreateButton()}
                         </div>
-                        <EventList handleSearch={this.handleSearch} chosenEventOnCaledar={this.state.eventList} />
+                        <EventList handleSearch={this.handleSearch} chosenEventOnCaledar={this.state.selectedDate} />
                     </div>
                 </div>
-                <AddNewEvent />
+                {this.props.isToken ? (<AddNewEvent />) : (null)}
             </div>
         );
     }
@@ -74,6 +88,15 @@ class MainContent extends Component {
 const mapDispatchToProps = (dispatch) => ({
     setModalStateFunction: state => {
         dispatch(modalAction(state));
+    },
+    getEventsByDate: (state) => {
+        // let date = moment(state.toString()).format(('M/DD/YYYY'))
+        // if (this.props.eventList.events[date]) {
+        dispatch(getDataFromDb(state));
+        // }
+    },
+    checkTokenFunction: () => {
+        dispatch(isToken());
     },
 });
 
@@ -85,8 +108,9 @@ const mapStateToProps = (state) => ({
 
 MainContent.propTypes = {
     setModalStateFunction: PropTypes.func,
-    eventList: PropTypes.object,
+    eventList: PropTypes.array,
     isToken: PropTypes.bool,
+    checkTokenFunction: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);

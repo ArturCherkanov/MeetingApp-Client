@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import PropTypes from 'prop-types';
+
 import { modalAction } from '../../actions/modalAction';
 import { refresh } from '../../actions/isRefreshAction';
 import { addDataToDb } from '../../actions/addEventItemAction';
-
 
 // Need to split by components
 import './AddNewEvent.css';
@@ -19,8 +20,23 @@ class AddNewEvent extends Component {
         };
     }
 
+    addEvent = (message, time) => {
+        const date = moment(this.state.time).format('YYYY-MM-DD');
+        const currentDate = moment().format('YYYY-MM-DD');
+        const currentISOdate = moment(time, 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DDTHH:mm:ssZ');
+
+        let isAsyncLoadEvent = this.props.eventList.events[date] || currentDate === date;
+
+        this.props.addEvent(message, currentISOdate, isAsyncLoadEvent);
+
+    }
+
     render() {
-        const handleRequest = e => { e.preventDefault(); this.props.setModalStateFunction(false); this.props.addEvent(this.state.message, this.state.time); };
+        const handleRequest = e => {
+            e.preventDefault();
+            this.props.setModalStateFunction(false);
+            this.addEvent(this.state.message, this.state.time);
+        };
 
         return (
             <div className={'addNewEvent ' + (this.props.active ? ' active' : ' disabled')}>
@@ -40,7 +56,7 @@ class AddNewEvent extends Component {
                         </label>
                         <label className="addNEwEvent-Label">
                             <span>Time:</span>
-                            <input type="datetime-local" step="0.001" className="default-input" onChange={e => this.setState({ time: e.target.value })} />
+                            <input type="datetime-local" step="1" className="default-input" onChange={e => this.setState({ time: e.target.value })} />
                         </label>
                         <label className="addNEwEvent-Label">
                             <span>Notes:</span>
@@ -78,8 +94,9 @@ class AddNewEvent extends Component {
 
 AddNewEvent.propTypes = {
     setModalStateFunction: PropTypes.func,
-    active: PropTypes.string,
+    active: PropTypes.bool,
     addEvent: PropTypes.func,
+    eventList: PropTypes.object,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -89,14 +106,15 @@ const mapDispatchToProps = (dispatch) => ({
     update: state => {
         dispatch(refresh(state));
     },
-    addEvent: (message, time) => {
-        dispatch(addDataToDb(message, time));
+    addEvent: (message, time, isAsyncLoadEvent) => {
+        dispatch(addDataToDb(message, time, isAsyncLoadEvent));
     },
 });
 
 const mapStateToProps = (state) => ({
     active: state.modalView.modalState,
     refresh: state.refresh,
+    eventList: state.eventList,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewEvent);

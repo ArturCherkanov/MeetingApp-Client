@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import EventListItem from '../EventListItem/EventListItem';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
-import { getDataFromDb } from '../../actions/currentEventListAction';
+import { getDataFromDb } from '../../../../actions/currentEventListAction';
 import { refresh } from '../../../../actions/isRefreshAction';
 
 import mainStyles from './EventList.css';
@@ -18,11 +19,11 @@ class EventList extends Component {
     }
 
     UNSAFE_componentWillMount() {
-        this.props.getDataFromDb();
+        this.props.getEventsFromDb(moment().format('YYYY-MM-DD'));
     }
 
     render() {
-        const visibleItems = this.getVisibleItems(this.props.eventList.events, this.state.searchQuery, this.selectedEventToggle(), this.props.refresh);
+        const visibleItems = this.getVisibleItems(this.props.eventList.events, this.state.searchQuery, this.props.chosenEventOnCaledar);
 
         return (
             <div className={mainStyles.eventListContainer}>
@@ -56,23 +57,35 @@ class EventList extends Component {
         // setting flag and getting data after refresh
 
         this.props.update(true);
-        this.props.getDataFromDb();
+        // this.props.getDataFromDb();
     }
 
     // function for computing current events by different queries
 
-    getVisibleItems = (list, search = null, selectedDate = null, refreshed = false) => {
+    getVisibleItems = (list = null, search = null, selectedDate = null) => {
 
+        let currentDate = moment().format('YYYY-MM-DD');
+        let visibleItems = list[currentDate];
         let searchQuery = search.toLowerCase();
 
-        if ((!searchQuery && !selectedDate) || (!searchQuery && !selectedDate && refreshed)) {
-            return list[0];
-        } else if (!search && selectedDate) {
-            return selectedDate;
-        } else if (search && selectedDate) {
-            return selectedDate.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        if (selectedDate) {
+            const test = selectedDate.toString();
+            const date = moment(test).format('YYYY-MM-DD');
+            visibleItems = list[date];
         }
-        return list[0].filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        if (searchQuery) {
+            visibleItems = visibleItems.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        }
+        // //THH:mm:ss.SSS
+        // console.log(currentDate);
+        // if ((!searchQuery && !selectedDate) || (!searchQuery && !selectedDate && refreshed)) {
+        //     // return list.filter(event => event.time.indexOf(currentDate)!==-1);
+        // } else if (!search && selectedDate) {
+        //     return selectedDate;
+        // } else if (search && selectedDate) {
+        //     return selectedDate.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        // }
+        return visibleItems;
     }
 
     handleSearchInputChange = (e) => {
@@ -88,8 +101,8 @@ class EventList extends Component {
 
 
 const mapDispatchToProps = dispatch => ({
-    getDataFromDb: () => {
-        dispatch(getDataFromDb());
+    getEventsFromDb: (date) => {
+        dispatch(getDataFromDb(date));
     },
     update: state => {
         dispatch(refresh(state));
@@ -110,7 +123,7 @@ EventList.propTypes = {
     eventList: PropTypes.object,
     refresh: PropTypes.bool,
     update: PropTypes.func,
-    getDataFromDb: PropTypes.func,
+    getEventsFromDb: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);
