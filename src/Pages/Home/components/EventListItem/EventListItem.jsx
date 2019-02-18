@@ -16,7 +16,7 @@ class EventListItem extends Component {
 EventListItem.propTypes = {
     time: PropTypes.string,
     message: PropTypes.string,
-    event: PropTypes.string,
+    event: PropTypes.object,
 };
 
 export default EventListItem;
