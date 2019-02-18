@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import LoginForm from '../../../../components/LoginForm/LoginForm';
+import LoginForm from '../../../../components/LoginForm/loginForm';
 import { addUserToDB } from '../../../../api/';
 
 import mainStyles from './Registration.css';
@@ -25,10 +26,16 @@ class RegistrationContainer extends Component {
 
     createUser = (e, username, password) => {
         e.preventDefault();
-        addUserToDB(username, password);
+        addUserToDB(username, password)
+            .then(res => { localStorage.setItem('token', res.data.token); })
+            .then(() => this.props.history.push('/'));
     }
 
     /*-----------END СUSTOM METHODS-----------*/
 }
+
+RegistrationContainer.propTypes = {
+    history: PropTypes.object,
+};
 
 export default connect()(RegistrationContainer);
