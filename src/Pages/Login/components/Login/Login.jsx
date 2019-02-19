@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import LoginForm from '../../../../components/LoginForm/loginForm';
+import LoginForm from '../LoginForm/loginForm';
 import { findUserInDB } from '../../../../api/';
 import { isToken } from '../../../../actions/isTokenAction';
 

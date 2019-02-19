@@ -10,11 +10,8 @@ import {
 
 // Users
 
-export const addUserToDB = (username, password) => (
-    post(API_PATH + USERS_PATH, false, {
-        username: username,
-        password: password,
-    })
+export const addUserToDB = (userData) => (
+    post(API_PATH + USERS_PATH, false, userData)
 );
 
 export const findUserInDB = (username, password) => (
