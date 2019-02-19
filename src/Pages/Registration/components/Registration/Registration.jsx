@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import LoginForm from '../../../../components/LoginForm/loginForm';
+import RegistrationForm from '../RegistrationForm/registrationForm';
 import { addUserToDB } from '../../../../api/';
 
 import mainStyles from './Registration.css';
@@ -15,7 +15,7 @@ class RegistrationContainer extends Component {
                 <div className="container">
                     <div className={mainStyles.formContainer}>
                         <h1 className="d-block">Registration</h1>
-                        <LoginForm buttonName={'Registration'} submitFunction={this.createUser} />
+                        <RegistrationForm buttonName={'Registration'} submitFunction={this.createUser} />
                     </div>
                 </div>
             </div>
