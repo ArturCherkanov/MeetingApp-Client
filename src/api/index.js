@@ -28,10 +28,9 @@ export const findUserInDB = (username, password) => (
 
 // Events
 
-export const putEvent = (message, time, isAsyncLoadEvents) => (
+export const putEvent = (event, isAsyncLoadEvents) => (
     post(API_PATH + EVENTS_PATH, true, {
-        message: message,
-        time: time,
+        eventData: event,
         isAsyncLoadEvents: isAsyncLoadEvents,
     })
 );
