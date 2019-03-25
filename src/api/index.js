@@ -7,6 +7,7 @@ import {
     TOKEN_PATH,
     LOGOUT_PATH,
     USERS_LIST,
+    ROOM_PATH,
     VALIDATE_PATH,
 } from './paths';
 
@@ -50,6 +51,12 @@ export const getToken = () => (
 export const getUserList = () => (
     get(API_PATH + USERS_PATH + USERS_LIST, true, null)
 );
+
+export const getRoomList = (dates) => (
+    get(API_PATH + ROOM_PATH, true, {...dates})
+);
+
+
 export const logout = () => (
     get(API_PATH + USERS_PATH + LOGOUT_PATH, true, null)
 );
