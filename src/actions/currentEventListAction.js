@@ -1,6 +1,6 @@
 import { getEvents } from '../api';
 
-export const getDataFromDb = (date) => dispatch => {
+export const getEventsFromDb = (date) => dispatch => {
     getEvents(date)
         .then(res => res.data)
         .then(currentEventList => dispatch({
