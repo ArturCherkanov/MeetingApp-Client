@@ -6,6 +6,7 @@ import {
     USERS_PATH,
     TOKEN_PATH,
     LOGOUT_PATH,
+    VALIDATE_PATH,
 } from './paths';
 
 // Users

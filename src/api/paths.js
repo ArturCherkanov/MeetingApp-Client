@@ -14,3 +14,4 @@ export const TOKEN_PATH = '/token/';
 export const LOGOUT_PATH = 'logout';
 
 //
+export const VALIDATE_PATH = 'validate/';
