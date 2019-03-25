@@ -6,6 +6,7 @@ export const EVENTS_PATH = '/events/';
 
 // Users
 export const USERS_PATH = '/users/';
+export const USERS_LIST = 'list/';
 
 // Token
 export const TOKEN_PATH = '/token/';
