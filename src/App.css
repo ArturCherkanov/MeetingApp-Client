@@ -10,6 +10,10 @@
   display: block;
 }
 
+#root {
+  background: #b1c7e8;
+}
+
 .main-content{
   position: relative;
   height: 100vh;
@@ -36,4 +40,35 @@
   display: block;
   margin: 0 auto;
   padding: 0 15px;
+}
+.success-button {
+  color: #fff;
+  background: #84f875;
+  border: none;
+  width: 40px;
+  font-size: 32px;
+  margin-right: 20px;
+}
+.create-button{
+  color: #fff;
+  background: #052900;
+  border: none;
+  width: 40px;
+  font-size: 32px;
+}
+.cancel-button {
+  color: #fff;
+  background: #f87575;
+  border: none;
+  width: 40px;
+  font-size: 32px;
+  margin-right: 20px;
+}
+.addNewEvent-create-button{
+  align-self: center;
+    padding: 10px;
+    background: #42ca9d;
+    border-radius: 3px;
+    border: none;
+    color: white;
 }
