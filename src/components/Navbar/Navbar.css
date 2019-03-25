@@ -46,8 +46,8 @@
   margin: 5px 0;
   background: white
 }
-  
-:local(.registrateButton){
+
+:local(.registerButton){
   padding: 10px;
   align-self: flex-end;
   background: #f4f5f7;
