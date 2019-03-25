@@ -1,14 +1,9 @@
 import validator from 'validator';
 import React from 'react';
+import moment from 'moment';
 
 export const password = (value, props, components) => {
-    // NOTE: Tricky place. The 'value' argument is always current component's value.
-    // So in case we're 'changing' let's say 'password' component - we'll compare it's value with 'confirm' value.
-    // But if we're changing 'confirm' component - the condition will always be true
-    // If we need to always compare own values - replace 'value' with components.password[0].value and make some magic with error rendering.
     if (value !== components['confirm'][0].value) { // components['password'][0].value !== components['confirm'][0].value
-        // 'confirm' - name of input
-        // components['confirm'] - array of same-name components because of checkboxes and radios
         return <div className="error-message">Passwords are not equal.</div>
     }
 };
@@ -24,3 +19,33 @@ export const email = (value) => {
         return <div className="error-message">{value} is not a valid email.</div>
     }
 };
+
+export const secondDateValidation = (previosDate, value, handleRequest) => {
+    if (value && previosDate === value) {
+        let date = moment(value).add(1, 'm').format('YYYY-MM-DDTHH:MM');
+        console.log(previosDate, date)
+        handleRequest('maxDate', date);
+    }
+
+    else if (moment(value).isBefore(previosDate)) {
+        handleRequest('maxDate', '');
+        handleRequest('room', '');
+    }
+
+    else {
+
+    }
+
+};
+export const approveSending = (formValues) => {
+    for (let key in formValues) {
+        if (!formValues[key]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+export const error = (val) => {
+    if (!val) return true;
+}
