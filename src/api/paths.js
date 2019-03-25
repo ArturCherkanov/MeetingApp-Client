@@ -20,4 +20,6 @@ export const LOGOUT_PATH = 'logout';
 export const ROOM_PATH = '/rooms/';
 
 
+//validate room
+
 export const VALIDATE_PATH = 'validate/';

@@ -60,3 +60,7 @@ export const getRoomList = (dates) => (
 export const logout = () => (
     get(API_PATH + USERS_PATH + LOGOUT_PATH, true, null)
 );
+
+export const getFreeRooms = (dates) => (
+    get(API_PATH + EVENTS_PATH + VALIDATE_PATH, true, {params: {...dates}})
+);
