@@ -15,4 +15,9 @@ export const TOKEN_PATH = '/token/';
 export const LOGOUT_PATH = 'logout';
 
 //
+
+//Room
+export const ROOM_PATH = '/rooms/';
+
+
 export const VALIDATE_PATH = 'validate/';
