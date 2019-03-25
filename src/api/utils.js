@@ -14,15 +14,15 @@ export const axiosInstance = (needAuth = false) => {
 export const get = (path, needAuth = false, params = null) => {
     const instance = axiosInstance(needAuth);
 
-    return new Promise((resolve, reject) => {
-        instance.get(path, params)
-            .then((response) => {
-                resolve(response);
-            })
-            .catch((error) => {
-                reject(error);
-            });
-    });
+    // return new Promise((resolve, reject) => {
+    return instance.get(path, params)
+    // .then((response) => {
+    //     resolve(response);
+    // })
+    // .catch((error) => {
+    //     reject(error);
+    // });
+    // });
 };
 
 export const post = (path, needAuth = false, data) => {
