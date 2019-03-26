@@ -18,8 +18,9 @@ class Navbar extends Component {
     render() {
         return (
             <div className={mainStyles.navbar}>
-                <ExitButton />
-                <div className={mainStyles.addEvent} onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction(true); }}>+</div>
+                <LogButton isToken={this.props.isToken} logout={this.logout} history={this.props.history} />
+                <RegButton history={this.props.history} />
+                <ModalButton />
                 <div className={mainStyles.profile}>
                     <span className={mainStyles.profileImg}></span>
                 </div>
