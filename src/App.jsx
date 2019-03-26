@@ -8,7 +8,7 @@ import Login from './Pages/Login/index';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
-export default class App extends Component {
+class App extends Component {
     render() {
         return (
             <Router>
@@ -17,7 +17,19 @@ export default class App extends Component {
                     <Route path='/registration' component={RegistationPage} />
                     <Route path='/login' component={Login} />
                 </div>
+                </>
             </Router>
         );
     }
 }
+const mapDispatchToProps = (dispatch) => ({
+    getEventsFromDb: (date) => {
+        dispatch(getEventsFromDb(date));
+    },
+});
+
+const mapStateToProps = (state) => ({
+    eventList: state.eventList,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
