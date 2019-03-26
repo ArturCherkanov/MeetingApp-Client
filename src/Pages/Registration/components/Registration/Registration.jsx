@@ -24,9 +24,9 @@ class RegistrationContainer extends Component {
 
     /*-----------СUSTOM METHODS-----------*/
 
-    createUser = (e, username, password) => {
+    createUser = (e, userData) => {
         e.preventDefault();
-        addUserToDB(username, password)
+        addUserToDB(userData)
             .then(res => { localStorage.setItem('token', res.data.token); })
             .then(() => this.props.history.push('/'));
     }
