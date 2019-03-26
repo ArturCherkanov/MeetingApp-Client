@@ -13,6 +13,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
+    componentDidMount() {
+        this.props.getEventsFromDb(moment().format('YYYY-MM-DD'));
+    }
     render() {
         return (
             <Router>
