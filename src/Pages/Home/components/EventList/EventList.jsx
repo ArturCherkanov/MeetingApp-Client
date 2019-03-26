@@ -102,7 +102,7 @@ class EventList extends Component {
 
 const mapDispatchToProps = dispatch => ({
     getEventsFromDb: (date) => {
-        dispatch(getDataFromDb(date));
+        dispatch(getEventsFromDb(date));
     },
     update: state => {
         dispatch(refresh(state));
