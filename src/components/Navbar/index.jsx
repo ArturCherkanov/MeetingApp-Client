@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 import { modalAction } from '../../actions/modalAction';
 import { isToken } from '../../actions/isTokenAction';
-import ExitButton from './components/exitButton';
+import LogButton from './components/LogButton/logButton';
+import RegButton from './components/RegButton/';
+import ModalButton from './components/ModalButton/ModalButton';
 import mainStyles from './Navbar.css';
 
 
