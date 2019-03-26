@@ -28,7 +28,7 @@ class MainContent extends Component {
         };
     }
 
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
         this.props.checkTokenFunction();
     }
 
