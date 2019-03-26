@@ -72,9 +72,9 @@ class MainContent extends Component {
         });
     }
     fetchEvents = (date) => {
-        let selectedDate = moment(date.toString()).format(('YYYY-MM-DD'))
+        let selectedDate = moment(date.toString()).format(('YYYY-MM-DD'));
         if (!this.props.eventList[selectedDate]) {
-            this.props.getEventsByDate(date)
+            this.props.getEventsByDate(date);
         }
     }
     render() {
@@ -83,7 +83,7 @@ class MainContent extends Component {
             (null);
         return (
             <div className='main-content'>
-                <Navbar />
+                <Navbar history={this.props.history} />
                 <div className="container">
                     <div className={mainStyles.mainContent}>
                         <div className="calendar-container">
