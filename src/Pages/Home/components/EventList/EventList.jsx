@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import { getDataFromDb } from '../../../../actions/currentEventListAction';
+import { getEventsFromDb } from '../../../../actions/currentEventListAction';
 import { refresh } from '../../../../actions/isRefreshAction';
 
 import mainStyles from './EventList.css';
