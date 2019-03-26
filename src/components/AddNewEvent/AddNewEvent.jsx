@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import openSocket from 'socket.io-client';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import Button from 'react-validation/build/button';
+import Select from 'react-validation/build/select';
+import Textarea from 'react-validation/build/textarea';
 
+import Users from './components/Users/';
+import Rooms from './components/Rooms/';
 import { modalAction } from '../../actions/modalAction';
 import { refresh } from '../../actions/isRefreshAction';
 import { addDataToDb } from '../../actions/addEventItemAction';
-
+import { error, required, approveSending, secondDateValidation } from '../../utils/validation';
 // Need to split by components
 import './AddNewEvent.css';
 
@@ -15,28 +23,72 @@ class AddNewEvent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: '',
-            time: '',
+            message: undefined,
+            minDate: undefined,
+            maxDate: undefined,
+            name: undefined,
+            room: undefined,
+            users: undefined,
         };
     }
 
-    addEvent = (message, time) => {
-        const date = moment(this.state.time).format('YYYY-MM-DD');
+    addEvent = (message, minDate, maxDate, name, room, users) => {
+
+        const date = moment(minDate).format('YYYY-MM-DD');
         const currentDate = moment().format('YYYY-MM-DD');
-        const currentISOdate = moment(time, 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DDTHH:mm:ssZ');
+        const minISOdate = moment(minDate, 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DDTHH:mm:ssZ');
+        const maxtISOdate = moment(maxDate, 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DDTHH:mm:ssZ');
 
         let isAsyncLoadEvent = this.props.eventList.events[date] || currentDate === date;
+        let event = {
+            date: {
+                from: minISOdate,
+                to: maxtISOdate,
+            },
+            room: room,
+            name: name,
+            users: users,
+            message: message,
+        };
 
-        this.props.addEvent(message, currentISOdate, isAsyncLoadEvent);
+        this.props.addEvent(event, isAsyncLoadEvent);
 
+    }
+    setUsers = (userList) => {
+        if (userList.length !== 0) {
+            this.makeInputHandler('users', userList);
+        }
+
+    }
+
+    makeInputHandler = (propName, value) => {
+        this.setState({
+            [propName]: value,
+        });
     }
 
     render() {
+        let isApprovedSending = approveSending(this.state);
         const handleRequest = e => {
             e.preventDefault();
+            this.addEvent(
+                this.state.message,
+                this.state.minDate,
+                this.state.maxDate,
+                this.state.name,
+                this.state.room,
+                this.state.users,
+            );
             this.props.setModalStateFunction(false);
-            this.addEvent(this.state.message, this.state.time);
+            const socket = openSocket('http://192.168.11.65:3001');
+            socket.emit('sendUsers', {
+                users: this.state.users,
+                date: this.state.minDate,
+                name: this.state.name,
+            });
         };
+        let dateValidation = secondDateValidation(this.state.minDate, this.state.maxDate, this.makeInputHandler);
+
 
         return (
             <div className={'addNewEvent ' + (this.props.active ? ' active' : ' disabled')}>
@@ -44,34 +96,51 @@ class AddNewEvent extends Component {
                     <div className="addNewEvent-form-container">
                         <label className="addNEwEvent-Label">
                             <span>Name</span>
-                            <input type="text" id="Name" className="default-input" />
+                            <input type="text"
+                                id="Name"
+                                className="default-input"
+                                onChange={e => { this.makeInputHandler('name', e.target.value); }} />
                         </label>
                         <label className="addNEwEvent-Label">
-                            <span>Users</span>
-                            <select className="default-input">
-                                <option>Test User 1</option>
-                                <option>Test User 2</option>
-                                <option>Test User 3</option>
-                            </select>
+                            <span>Name:</span>
+                            <Users setUsers={this.setUsers} />
                         </label>
                         <label className="addNEwEvent-Label">
-                            <span>Time:</span>
-                            <input type="datetime-local" step="1" className="default-input" onChange={e => this.setState({ time: e.target.value })} />
+                            <span>From:</span>
+                            <input type="datetime-local"
+                                step="1"
+                                className="default-input"
+                                onChange={e => {
+                                    this.makeInputHandler('minDate', e.target.value);
+                                }}
+
+                            />
+                            <span>To:</span>
+                            <input type="datetime-local"
+                                step="1"
+                                min={this.state.minDate}
+                                className="default-input"
+                                value={this.state.maxDate}
+                                onChange={e => {
+                                    this.makeInputHandler('maxDate', e.target.value);
+                                    // secondDateValidation(this.state.minDate, this.state.maxDate, this.makeInputHandler);
+
+                                }} />
                         </label>
                         <label className="addNEwEvent-Label">
                             <span>Notes:</span>
-                            <textarea className="default-input" onChange={e => this.setState({ message: e.target.value })}></textarea>
+                            <textarea className="default-input" onChange={e => { this.makeInputHandler('message', e.target.value); }}></textarea>
                         </label>
-                        <label className="addNEwEvent-Label">
-                            <span>Room</span>
-                            <select className="default-input">
-                                <option>Test Room 1</option>
-                                <option>Test Room 2</option>
-                                <option>Test Room 3</option>
-                            </select>
-                        </label>
+                        {
+                            this.state.maxDate &&
+                            <label className="addNEwEvent-Label">
+                                <span>Room</span>
+                                <Rooms validationDates={{ userFrom: this.state.minDate, userTo: this.state.maxDate }} room={this.state.room} setRoom={this.makeInputHandler} />
+                            </label>
+                        }
+
                         <div className="addNEwEvent-button-container">
-                            <button className="addNewEvent-create-button" onClick={(e) => { handleRequest(e); }}>CREATE</button>
+                            <button disabled={!isApprovedSending} className={!isApprovedSending ? 'disable-button' : 'addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
                             <button className="addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
                         </div>
                     </div>
@@ -106,8 +175,8 @@ const mapDispatchToProps = (dispatch) => ({
     update: state => {
         dispatch(refresh(state));
     },
-    addEvent: (message, time, isAsyncLoadEvent) => {
-        dispatch(addDataToDb(message, time, isAsyncLoadEvent));
+    addEvent: (event, isAsyncLoadEvent) => {
+        dispatch(addDataToDb(event, isAsyncLoadEvent));
     },
 });
 
