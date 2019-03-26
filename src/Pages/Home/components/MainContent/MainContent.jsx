@@ -3,13 +3,18 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import openSocket from 'socket.io-client';
 
 import Navbar from '../../../../components/Navbar/';
-import AddNewEvent from '../../../../components/AddNewEvent/AddNewEvent';
+import AddNewEvent from '../../components/AddNewEvent/AddNewEvent';
 import EventList from '../EventList/EventList';
+import Notification from '../../../../components/NotificationAlert';
+
 import { modalAction } from '../../../../actions/modalAction';
 import { isToken } from '../../../../actions/isTokenAction';
-import { getDataFromDb } from '../../actions/currentEventListAction'
+import { getEventsFromDb } from '../../actions/currentEventListAction';
+import { notificationAction } from '../../../../actions/notificationAction';
+import { getRooms } from '../../../../actions/getRoomListAction';
 
 import './Calendar.css';
 import mainStyles from './MainContent.css';
