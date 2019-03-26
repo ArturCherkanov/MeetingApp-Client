@@ -30,6 +30,15 @@ class MainContent extends Component {
 
     componentDidMount() {
         this.props.checkTokenFunction();
+        let token = localStorage.getItem('token');
+        if (token) {
+            this.props.getRoomList();
+            const socket = openSocket('http://192.168.11.65:3001');
+            socket.emit('join', { token: token });
+            socket.on('sendNotification', (req) => {
+                this.props.notificationAction(req);
+            })
+        }
     }
 
     activateWindow = () => {
