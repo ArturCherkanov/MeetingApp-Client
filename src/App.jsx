@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
-import HomePage from './Pages/Home/index';
-import RegistationPage from './Pages/Registration/index';
-import Login from './Pages/Login/index';
+import HomePage from './Pages/Home';
+import RegistationPage from './Pages/Registration';
+import Login from './Pages/Login';
+import Rooms from './Pages/Meetings';
+import { isToken } from './actions/isTokenAction';
+import { getEventsFromDb } from './actions/currentEventListAction';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
