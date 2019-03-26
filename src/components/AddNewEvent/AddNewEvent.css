@@ -8,15 +8,20 @@
     top: 0;
     background: #00000069;
   }
+  .disable-button{
+    background: gray;
+    color: #b8b4b4;
+    border: none;
+  }
   .addNewEvent.active{
     display:flex!important;
   }
-  
+
   .addNewEvent.disabled{
     display:none!important;
-  
+
   }
-  
+
   .addNewEvent-form{
     display: flex;
     background: #5362b1ab!important;
@@ -27,7 +32,7 @@
     margin: 0 auto;
     flex-direction: column;
     max-width: 500px;
-  
+
   }
   .addNEwEvent-Label{
     display: flex;
