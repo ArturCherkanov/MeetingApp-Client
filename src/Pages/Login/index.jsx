@@ -8,7 +8,7 @@ import { isToken } from '../../actions/isTokenAction';
 
 class LoginPage extends Component {
 
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
         this.props.checkTokenFunction();
     }
 
