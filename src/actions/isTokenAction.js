@@ -7,9 +7,6 @@ export const isToken = () => dispatch => {
                 type: 'RIGHT_TOKEN',
                 payload: res.data.token,
             });
-        }).catch(() => {
-            dispatch({
-                type: 'WRONG_TOKEN',
-            });
         });
+
 };
