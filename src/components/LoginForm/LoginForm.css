@@ -1,4 +1,4 @@
-.registrate-form{
+.registere-form{
     display: flex;
     justify-content: center;
     align-content: center;
@@ -6,13 +6,12 @@
     width: 50%;
     max-width: 400px;
   }
-  .registrate-form>div{
+  .register-form>div{
     display: flex;
     flex-direction: column;
   }
-  
+
   .error-message{
     color:red;
     margin-top: -19px;
   }
-  
