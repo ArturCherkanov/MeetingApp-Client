@@ -11,7 +11,10 @@ import mainStyles from './Navbar.css';
 
 
 class Navbar extends Component {
-
+    logout = () => {
+        localStorage.removeItem('token');
+        this.props.checkTokenFunction();
+    };
     render() {
         return (
             <div className={mainStyles.navbar}>
