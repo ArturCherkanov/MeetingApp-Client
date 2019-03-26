@@ -18,7 +18,7 @@ class EventList extends Component {
         };
     }
 
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
         this.props.getEventsFromDb(moment().format('YYYY-MM-DD'));
     }
 
