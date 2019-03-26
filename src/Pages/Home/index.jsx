@@ -4,7 +4,6 @@ import openSocket from 'socket.io-client';
 import MainContent from './components/MainContent/MainContent';
 
 export default class HomePage extends Component {
-
     componentDidMount() {
         const socket = openSocket('http://192.168.11.65:3001');
         socket.on('event', (data) => {
@@ -14,7 +13,7 @@ export default class HomePage extends Component {
     // var socket = io();
     render() {
         return (
-            <MainContent />
+            <MainContent history={this.props.history} />
         );
     }
 }
