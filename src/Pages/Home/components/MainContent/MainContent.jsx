@@ -94,6 +94,7 @@ class MainContent extends Component {
                     </div>
                 </div>
                 {this.props.isToken ? (<AddNewEvent />) : (null)}
+                {this.props.notification.active ? (<Notification />) : (null)}
             </div>
         );
     }
@@ -112,12 +113,16 @@ const mapDispatchToProps = (dispatch) => ({
     checkTokenFunction: () => {
         dispatch(isToken());
     },
+    notificationAction: (state) => {
+        dispatch(notificationAction(state));
+    }
 });
 
 const mapStateToProps = (state) => ({
     modalState: state.modalView.modalState,
     eventList: state.eventList.events,
     isToken: state.isToken,
+    notification: state.notification,
 });
 
 MainContent.propTypes = {
