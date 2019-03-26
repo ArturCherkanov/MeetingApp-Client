@@ -7,14 +7,14 @@ class EventListItem extends Component {
     render() {
         return (
             <li className={mainStyles.eventItem} data-value={this.props.event}>
-                <span>{this.props.event.time + ' / ' + this.props.event.message}</span>
+                <span>Start at:{this.props.event.timeFrom + ' / ' + this.props.event.message}</span>
             </li>
         );
     }
 }
 
 EventListItem.propTypes = {
-    time: PropTypes.string,
+    timeFrom: PropTypes.string,
     message: PropTypes.string,
     event: PropTypes.object,
 };
