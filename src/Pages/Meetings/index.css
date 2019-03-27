@@ -1,0 +1,94 @@
+.roomList{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 600px;
+}
+.meetingRoom,.meetingRoom>*{
+    display: flex;
+    border: 1px solid;
+    flex: 1;
+}
+.meetingLine{
+    flex:20;
+    position: relative;
+    overflow: hidden;
+    background: #a0a096;
+}
+.Room{
+    flex:1;
+    background:#90898982
+}
+.datePicker{
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    height: 50px;
+}
+.dateswitcher{
+    width: 100%;
+}
+
+.rommList-container{
+    height: 100%;
+    max-width:1120px;
+    width:100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    cursor: pointer;
+}
+.meeting-item{
+    border: 1px solid;
+    display: flex;
+    min-width: 1px;
+    position: absolute;
+    overflow: auto;
+    height: 100%;
+    background: #ac1f88;
+}
+.timeLine{
+    display:flex;
+    flex: 20;
+}
+.roomListHead{
+    display: flex;
+    border: 1px solid;
+    height: 120px;
+    background:#90898982;
+}
+.roomHead{
+    flex: 1;
+    border: 1px solid;
+    font-weight: 600;
+    text-transform: uppercase;
+    word-break: break-word;
+}
+.hour{
+    flex:1;
+    border: 1px solid;
+    font-size: 30px;
+    font-weight: 600;
+}
+.dateswitcher> button{
+    border: none;
+    color: white;
+    background: #644141;
+    transition: 0.3s all;
+    cursor: pointer;
+}
+.dateswitcher> button:first-child{
+    border-radius: 50% 50% 0;
+    margin-right: 10px;
+}
+.dateswitcher> button:last-child{
+    border-radius: 0 50% 50%;
+    margin-left: 10px;
+}
+.dateswitcher> button:hover{
+    font-size: 25px;
+}
