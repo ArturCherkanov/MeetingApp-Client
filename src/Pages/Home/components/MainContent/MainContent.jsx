@@ -105,10 +105,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(modalAction(state));
     },
     getEventsByDate: (state) => {
-        // let date = moment(state.toString()).format(('M/DD/YYYY'))
-        // if (this.props.eventList.events[date]) {
-        dispatch(getDataFromDb(state));
-        // }
+        dispatch(getEventsFromDb(state));
     },
     checkTokenFunction: () => {
         dispatch(isToken());
