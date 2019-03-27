@@ -22,7 +22,7 @@ class LoginForm extends Component {
     }
     render() {
         return (
-            <Form className="registrate-form" onSubmit={e =>
+            <Form className="register-form" onSubmit={e =>
                 this.props.submitFunction(e, {
                     firstname: this.state.firstname,
                     lastname: this.state.lastname,
