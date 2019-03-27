@@ -113,6 +113,10 @@ const mapDispatchToProps = (dispatch) => ({
     checkTokenFunction: () => {
         dispatch(isToken());
     },
+    getRoomList: () => {
+        dispatch(getRooms());
+    },
+
     notificationAction: (state) => {
         dispatch(notificationAction(state));
     }
@@ -123,6 +127,8 @@ const mapStateToProps = (state) => ({
     eventList: state.eventList.events,
     isToken: state.isToken,
     notification: state.notification,
+    roomList: state.roomList,
+
 });
 
 MainContent.propTypes = {
