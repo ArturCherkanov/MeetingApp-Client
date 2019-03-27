@@ -8,7 +8,7 @@ import Input from 'react-validation/build/input';
 import Button from 'react-validation/build/button';
 import './RegistrationForm.css';
 
-class LoginForm extends Component {
+class RegistrationForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,15 +41,15 @@ class LoginForm extends Component {
                 <label htmlFor="password">Confirm Password</label>
                 <Input id="password" name='confirm' type="password" value={this.state.confirm} onChange={e => this.setState({ confirm: e.target.value })} validations={[required]} className="default-input" />
 
-                <Button className="registrate-button">{this.props.buttonName}</Button>
+                <Button className="register-button">{this.props.buttonName}</Button>
             </Form>
         );
     }
 }
 
-LoginForm.propTypes = {
+RegistrationForm.propTypes = {
     submitFunction: PropTypes.func,
     buttonName: PropTypes.string,
 };
 
-export default connect()(LoginForm);
+export default connect()(RegistrationForm);
