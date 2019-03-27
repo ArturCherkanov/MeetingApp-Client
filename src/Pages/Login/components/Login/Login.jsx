@@ -24,7 +24,7 @@ class Login extends Component {
                 <div className="container">
                     <div className={mainStyles.formContainer}>
                         <h1 className="d-block">Login</h1>
-                        <LoginForm buttonName={'Login'} submitFunction={this.findUser} />
+                        <LoginForm buttonName={'Login'} submitFunction={this.authActions} />
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@ class Login extends Component {
     }
     /*-----------СUSTOM METHODS-----------*/
 
-    findUser = (e, username, password) => {
+    authActions = (e, username, password) => {
         e.preventDefault();
         findUserInDB(username, password)
             .then(res => localStorage.setItem('token', res.data.token))
