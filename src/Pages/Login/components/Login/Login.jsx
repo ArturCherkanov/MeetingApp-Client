@@ -17,10 +17,7 @@ class Login extends Component {
         };
     }
 
-    UNSAFE_componentWillMount() {
-        // this.props.checkTokenFunction()
-        // if (this.props.isToken) { this.props.history.push('/')}
-    }
+
     render() {
         return (
             <div className="main-content">
