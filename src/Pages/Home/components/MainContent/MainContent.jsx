@@ -78,7 +78,7 @@ class MainContent extends Component {
         }
     }
     render() {
-        const addNewEventCreateButton = () => this.props.isToken ?
+        const addNewEventCreateButton = () => this.props.Auth ?
             (<button className={mainStyles.addNewEventCreateButton + ' shadow'} onClick={this.activateWindow}>Create</button>) :
             (null);
         return (
@@ -93,7 +93,7 @@ class MainContent extends Component {
                         <EventList handleSearch={this.handleSearch} chosenEventOnCaledar={this.state.selectedDate} />
                     </div>
                 </div>
-                {this.props.isToken ? (<AddNewEvent />) : (null)}
+                {this.props.Auth ? (<AddNewEvent />) : (null)}
                 {this.props.notification.active ? (<Notification />) : (null)}
             </div>
         );
@@ -122,7 +122,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
     modalState: state.modalView.modalState,
     eventList: state.eventList.events,
-    isToken: state.isToken,
+    Auth: state.Auth,
     notification: state.notification,
     roomList: state.roomList,
 
@@ -131,7 +131,7 @@ const mapStateToProps = (state) => ({
 MainContent.propTypes = {
     setModalStateFunction: PropTypes.func,
     eventList: PropTypes.array,
-    isToken: PropTypes.bool,
+    Auth: PropTypes.bool,
     checkTokenFunction: PropTypes.func,
 };
 

@@ -13,7 +13,7 @@ class RegistrationPage extends Component {
     }
 
     render() {
-        if (this.props.isToken) {
+        if (this.props.Auth) {
             return <Redirect to='/' />;
         }
         return < RegistrationContainer history={this.props.history} />
@@ -22,7 +22,7 @@ class RegistrationPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    isToken: state.isToken,
+    Auth: state.Auth,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 RegistrationPage.propTypes = {
     history: PropTypes.object,
-    isToken: PropTypes.bool,
+    Auth: PropTypes.bool,
     checkTokenFunction: PropTypes.func,
 
 };

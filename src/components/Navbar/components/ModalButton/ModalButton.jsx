@@ -9,7 +9,7 @@ import mainStyles from '../../Navbar.css';
 class ModalButton extends Component {
 
     render() {
-        if (this.props.isToken) {
+        if (this.props.Auth) {
             return <div className={mainStyles.addEvent} onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction(true); }}>+</div>
         }
         return null;
@@ -22,10 +22,10 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 const mapStateToProps = (state) => ({
-    isToken: state.isToken,
+    Auth: state.Auth,
 });
 ModalButton.propTypes = {
-    isToken: PropTypes.bool,
+    Auth: PropTypes.bool,
     checkTokenFunction: PropTypes.func,
 };
 

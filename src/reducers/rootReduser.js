@@ -3,21 +3,22 @@ import { combineReducers } from 'redux';
 import modalView from './modalAppearance';
 import eventList from './eventsList';
 // import refresh from './needRefresh';
-import auth from './Auth';
-import isToken from './isToken';
+// import isToken from './isToken';
 import notification from './notidicationAppearance';
 import roomList from './roomsList';
-import Common from './Common';
+// import Common from './Common';
+import Auth from './Auth';
+
 
 
 
 
 const rootReducer = combineReducers({
-    Common,
+    // Common,
     modalView,
     eventList,
-    auth,
-    isToken,
+    Auth,
+    // isToken,
     notification,
     roomList,
 });
