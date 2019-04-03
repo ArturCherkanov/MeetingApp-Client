@@ -12,6 +12,12 @@ import { getEventsFromDb } from './actions/currentEventListAction';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faEdit)
+
 class App extends Component {
     componentDidMount() {
         this.props.getEventsFromDb(moment().format('YYYY-MM-DD'));
