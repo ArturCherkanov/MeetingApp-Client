@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { isToken } from '../../../../actions/isTokenAction';
 
 export default class LogButton extends Component {
     render() {
@@ -12,3 +11,8 @@ export default class LogButton extends Component {
     }
 }
 
+LogButton.propTypes = {
+    profile: PropTypes.string,
+    logout: PropTypes.func,
+    history: PropTypes.object,
+};

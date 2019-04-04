@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import HomePage from './Pages/Home';
 import RegistationPage from './Pages/Registration';
 import Login from './Pages/Login';
 import Rooms from './Pages/Meetings';
-import { isToken } from './actions/isTokenAction';
-import { getEventsFromDb } from './actions/currentEventListAction';
+import { isToken } from './actions/profileActions';
+import { getEventsFromDb } from './actions/eventsActions';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
@@ -16,7 +17,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faEdit)
+library.add(faEdit);
 
 class App extends Component {
     componentDidMount() {
@@ -44,5 +45,9 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
     eventList: state.eventList,
 });
+
+App.propTypes = {
+    getEventsFromDb: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

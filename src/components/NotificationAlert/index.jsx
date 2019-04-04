@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { notificationAction } from '../../actions/notificationAction';
+import { showNotificationAction } from '../../actions/notificationActions';
 import NotificationStyles from './NotificationAlert.css';
 
 class NotificationAlert extends Component {
@@ -11,15 +11,15 @@ class NotificationAlert extends Component {
         audio.play();
         audio.autoplay =false;
 
-        setTimeout(() => { this.props.notificationAction(false); }, 6000);
+        setTimeout(() => { this.props.showNotificationAction(false); }, 6000);
         return (
             <div className={NotificationStyles.alert}>{this.props.notification.msg}</div>
         );
     }
 }
 const mapDispatchToProps = (dispatch) => ({
-    notificationAction: (state) => {
-        dispatch(notificationAction(state));
+    showNotificationAction: (state) => {
+        dispatch(showNotificationAction(state));
     },
 
 });
@@ -29,6 +29,8 @@ const mapStateToProps = (state) => ({
 });
 
 NotificationAlert.propTypes = {
+    showNotificationAction: PropTypes.func,
+    notification: PropTypes.object,
 };
 
 

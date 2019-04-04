@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
+import PropTypes from 'prop-types';
 
 import MainContent from './components/MainContent/MainContent';
 
@@ -17,3 +18,6 @@ export default class HomePage extends Component {
         );
     }
 }
+HomePage.propTypes = {
+    history: PropTypes.object,
+};

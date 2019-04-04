@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import { getEventsFromDb } from '../../../../actions/currentEventListAction';
-import { refresh } from '../../../../actions/isRefreshAction';
+import { getEventsFromDb, setEditableEvent } from '../../actions/currentEventListAction';
+// import { refresh } from '../../../../actions/profileAction';
+import { modalAction } from '../../../../actions/modalActions';
+
 
 import mainStyles from './EventList.css';
 
@@ -31,10 +33,10 @@ class EventList extends Component {
                 <input className={'default-input ' + mainStyles.eventListSearch + ' shadow'} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
                 <ul className={mainStyles.eventList + ' shadow'}>
                     {visibleItems && visibleItems.map(elem => (
-                        <EventListItem event={elem} key={elem._id} />
+                        <EventListItem event={elem} setModalState={this.props.setModalStateFunction} setEditableEvent={this.props.setEditableEvent} key={elem._id} />
                     ))}
                 </ul>
-                <span className={mainStyles.viewAll} onClick={this.refresh}>Refresh</span>
+                {/* <span className={mainStyles.viewAll} onClick={this.refresh}>Refresh</span> */}
             </div>
         );
     }
@@ -44,11 +46,6 @@ class EventList extends Component {
     selectedEventToggle = () => {
 
         // selected date will refreshed straight after refresh
-
-        if (!this.props.refresh) {
-            return this.props.chosenEventOnCaledar;
-        }
-        return null;
 
     }
 
@@ -104,14 +101,21 @@ const mapDispatchToProps = dispatch => ({
     getEventsFromDb: (date) => {
         dispatch(getEventsFromDb(date));
     },
-    update: state => {
-        dispatch(refresh(state));
+    // update: state => {
+    //     dispatch(refresh(state));
+    // },
+    setModalStateFunction: state => {
+        dispatch(modalAction(state));
+    },
+    setEditableEvent: state => {
+        dispatch(setEditableEvent(state));
     },
 });
 
 const mapStateToProps = state => ({
     eventList: state.eventList,
-    refresh: state.refresh,
+    // refresh: state.refresh,
+    modalState: state.modalView.modalState,
 });
 
 
@@ -121,9 +125,11 @@ const mapStateToProps = state => ({
 EventList.propTypes = {
     chosenEventOnCaledar: PropTypes.array,
     eventList: PropTypes.object,
-    refresh: PropTypes.bool,
+    // refresh: PropTypes.bool,
     update: PropTypes.func,
     getEventsFromDb: PropTypes.func,
+    setModalStateFunction: PropTypes.func,
+    setEditableEvent: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);

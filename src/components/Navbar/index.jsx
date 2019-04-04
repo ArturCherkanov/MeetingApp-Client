@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { modalAction } from '../../actions/modalAction';
-import { isToken } from '../../actions/isTokenAction';
+import { modalAction } from '../../actions/modalActions';
+import { isToken } from '../../actions/profileActions';
 import LogButton from './components/LogButton/logButton';
 import RegButton from './components/RegButton/';
 import ModalButton from './components/ModalButton/ModalButton';
@@ -13,7 +13,7 @@ import mainStyles from './Navbar.css';
 class Navbar extends Component {
     logout = () => {
         localStorage.removeItem('token');
-        this.props.history.push('/login')
+        this.props.history.push('/login');
         // this.props.checkTokenFunction();
 
     };
@@ -45,7 +45,8 @@ const mapStateToProps = (state) => ({
 });
 
 Navbar.propTypes = {
-    setModalStateFunction: PropTypes.func,
+    history: PropTypes.object,
+    profile: PropTypes.string,
 };
 
 

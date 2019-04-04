@@ -10,11 +10,11 @@ import AddNewEvent from '../../components/AddNewEvent/AddNewEvent';
 import EventList from '../EventList/EventList';
 import Notification from '../../../../components/NotificationAlert';
 
-import { modalAction } from '../../../../actions/modalAction';
-import { isToken } from '../../../../actions/isTokenAction';
+import { modalAction } from '../../../../actions/modalActions';
+import { isToken } from '../../../../actions/profileActions';
 import { getEventsFromDb } from '../../actions/currentEventListAction';
-import { notificationAction } from '../../../../actions/notificationAction';
-import { getRooms } from '../../../../actions/getRoomListAction';
+import { showNotificationAction } from '../../../../actions/notificationActions';
+import { getRooms } from '../../../../actions/roomsActions';
 
 import './Calendar.css';
 import mainStyles from './MainContent.css';
@@ -115,7 +115,7 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     notificationAction: (state) => {
-        dispatch(notificationAction(state));
+        dispatch(showNotificationAction(state));
     }
 });
 
@@ -132,6 +132,7 @@ MainContent.propTypes = {
     setModalStateFunction: PropTypes.func,
     eventList: PropTypes.array,
     profile: PropTypes.bool,
+    getRoomList: PropTypes.func,
     checkTokenFunction: PropTypes.func,
 };
 

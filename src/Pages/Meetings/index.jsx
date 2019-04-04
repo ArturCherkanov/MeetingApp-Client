@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CurrentDate from './components/Date';
 import Room from './components/Room';
-import { getRooms } from '../../actions/getRoomListAction';
+import { getRooms } from '../../actions/roomsActions';
 import Navbar from '../../components/Navbar';
-import { isToken } from '../../actions/isTokenAction';
-import { getEventsFromDb } from '../../actions/currentEventListAction';
+import { isToken } from '../../actions/profileActions';
+import { getEventsFromDb } from '../../actions/eventsActions';
 import './index.css';
 import moment from 'moment';
 class Rooms extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: moment().format('YYYY-MM-DD')
-        }
+            time: moment().format('YYYY-MM-DD'),
+        };
     }
 
     setTime = (time) => {
         this.setState({
-            time: time
-        })
+            time: time,
+        });
     };
 
     setEventsForRoom = (room) => {
@@ -56,7 +57,7 @@ class Rooms extends Component {
                         </div>
                         {this.props.roomList.rooms && this.props.roomList.rooms.map((room, i) => {
                             let eventsForRoom = this.setEventsForRoom(room);
-                            return <Room key={i} name={room.name} events={eventsForRoom} time={this.state.time} />
+                            return <Room key={i} name={room.name} events={eventsForRoom} time={this.state.time} />;
                         }
                         )}
                     </div>
@@ -80,8 +81,17 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(getRooms());
     },
     getEvents: (state) => {
-        dispatch(getEventsFromDb(state))
-    }
+        dispatch(getEventsFromDb(state));
+    },
 });
+
+Rooms.propTypes = {
+    getRoomList: PropTypes.func,
+    checkToken: PropTypes.func,
+    eventList: PropTypes.array,
+    roomList: PropTypes.array,
+    getEvents: PropTypes.func,
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Rooms);

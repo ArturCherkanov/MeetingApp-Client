@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import LoginContainer from './components/Login/Login';
-import { isToken } from '../../actions/isTokenAction';
+import { isToken } from '../../actions/profileActions';
 
 class LoginPage extends Component {
 

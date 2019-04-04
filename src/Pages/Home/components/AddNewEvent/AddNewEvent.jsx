@@ -6,9 +6,9 @@ import openSocket from 'socket.io-client';
 
 import Users from './components/Users/';
 import Rooms from './components/Rooms/';
-import { modalAction } from '../../../../actions/modalAction';
-import { refresh } from '../../../../actions/isRefreshAction';
-import { addDataToDb } from '../../../../actions/addEventItemAction';
+import { modalAction } from '../../../../actions/modalActions';
+// import { refresh } from '../../../../actions/profileAction';
+import { addDataToDb } from '../../../../actions/eventsActions';
 import { error, required, approveSending, secondDateValidation } from '../../../../utils/validation';
 // Need to split by components
 import './AddNewEvent.css';
@@ -75,10 +75,13 @@ class AddNewEvent extends Component {
     }
 
     componentDidMount() {
-        this.setFields()
+        if (this.props.eventList.currentEvent) {
+            this.makeInputHandler('name', this.props.eventList.currentEvent.name);
+        }
     }
 
     render() {
+
         let isApprovedSending = approveSending(this.state);
         const handleRequest = e => {
             e.preventDefault();
@@ -146,7 +149,8 @@ class AddNewEvent extends Component {
                             this.state.maxDate &&
                             <label className="addNEwEvent-Label">
                                 <span>Room</span>
-                                <Rooms validationDates={{ userFrom: this.state.minDate, userTo: this.state.maxDate }} room={this.state.room} setRoom={this.makeInputHandler} />
+                                <Rooms validationDates={{ userFrom: this.state.minDate,
+                                    userTo: this.state.maxDate }} room={this.state.room} setRoom={this.makeInputHandler} />
                             </label>
                         }
 
@@ -177,15 +181,16 @@ AddNewEvent.propTypes = {
     active: PropTypes.bool,
     addEvent: PropTypes.func,
     eventList: PropTypes.object,
+    data: PropTypes.object,
 };
 
 const mapDispatchToProps = (dispatch) => ({
     setModalStateFunction: state => {
         dispatch(modalAction(state));
     },
-    update: state => {
-        dispatch(refresh(state));
-    },
+    // update: state => {
+    //     dispatch(refresh(state));
+    // },
     addEvent: (event, isAsyncLoadEvent) => {
         dispatch(addDataToDb(event, isAsyncLoadEvent));
     },
@@ -195,6 +200,7 @@ const mapStateToProps = (state) => ({
     active: state.modalView.modalState,
     refresh: state.refresh,
     eventList: state.eventList,
+    data: PropTypes.object,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewEvent);

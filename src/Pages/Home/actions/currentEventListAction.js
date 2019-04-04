@@ -1,4 +1,4 @@
-import { getEvents } from '../api';
+import { getEvents } from '../../../api';
 
 export const getEventsFromDb = (date) => dispatch => {
     getEvents(date)
@@ -8,3 +8,8 @@ export const getEventsFromDb = (date) => dispatch => {
             payload: currentEventList,
         }));
 };
+
+export const setEditableEvent = (event) => ({
+    type: 'SET_EDITING_ROOM',
+    payload: event,
+});

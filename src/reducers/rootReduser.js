@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 
 import modalView from '../Pages/Home/reducers/modalAppearance';
-import eventList from './eventsList';
-import notification from './notidicationAppearance';
-import roomList from './roomsList';
-import Common from './Common';
-import profile from './Profile';
+import eventList from './events';
+import notification from './notidication';
+import roomList from './rooms';
+import Common from './common';
+import profile from './profile';
 
 
 
 
 
 const rootReducer = combineReducers({
-    Common,
+    // Common,
     modalView,
     eventList,
     profile,

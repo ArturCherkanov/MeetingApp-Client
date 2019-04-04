@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import LoginForm from '../LoginForm/loginForm';
 import { findUserInDB } from '../../../../api/';
-import { isToken } from '../../../../actions/isTokenAction';
+import { isToken } from '../../../../actions/profileActions';
 
 import mainStyles from './Login.css';
 

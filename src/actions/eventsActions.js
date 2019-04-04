@@ -1,4 +1,4 @@
-import { getEvents, putEvent } from '../api/';
+import { getEvents, putEvent } from '../api';
 
 
 export const addDataToDb = (event, isAsyncLoadEvents) => dispatch => {
@@ -21,3 +21,14 @@ export const addDataToDb = (event, isAsyncLoadEvents) => dispatch => {
         })
         );
 };
+
+
+export const getEventsFromDb = (date) => dispatch => {
+    getEvents(date)
+        .then(res => res.data)
+        .then(currentEventList => dispatch({
+            type: 'SET_EVENTLIST',
+            payload: currentEventList,
+        }));
+};
+

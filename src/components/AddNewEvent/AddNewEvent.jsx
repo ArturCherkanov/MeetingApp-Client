@@ -11,9 +11,9 @@ import Textarea from 'react-validation/build/textarea';
 
 import Users from './components/Users/';
 import Rooms from './components/Rooms/';
-import { modalAction } from '../../actions/modalAction';
-import { refresh } from '../../actions/isRefreshAction';
-import { addDataToDb } from '../../actions/addEventItemAction';
+import { modalAction } from '../../actions/modalActions';
+import { refresh } from '../../actions/profileActions';
+import { addDataToDb } from '../../actions/eventsActions';
 import { error, required, approveSending, secondDateValidation } from '../../utils/validation';
 // Need to split by components
 import './AddNewEvent.css';

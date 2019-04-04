@@ -1,5 +1,6 @@
 const initialState = {
     events: [],
+    currentEvent: {},
     isLoading: false,
 };
 
@@ -20,8 +21,15 @@ export default function eventList(state = initialState, action) {
     case 'SET_EVENTLIST':
         return {
             ...state,
-            events: { ...state.events,
-                ...action.payload },
+            events: {
+                ...state.events,
+                ...action.payload,
+            },
+        };
+    case 'SET_EDITING_ROOM':
+        return {
+            ...state,
+            currentEvent: { ...action.payload },
         };
     default:
         return state;

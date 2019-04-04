@@ -1,4 +1,4 @@
-import { getToken } from '../api/';
+import { getToken } from '../api';
 
 export const isToken = () => dispatch => {
     getToken()
