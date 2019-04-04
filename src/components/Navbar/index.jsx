@@ -20,7 +20,7 @@ class Navbar extends Component {
     render() {
         return (
             <div className={mainStyles.navbar}>
-                <LogButton Auth={this.props.Auth} logout={this.logout} history={this.props.history} />
+                <LogButton profile={this.props.profile} logout={this.logout} history={this.props.history} />
                 <RegButton history={this.props.history} />
                 <ModalButton />
                 <div className={mainStyles.profile}>
@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
     active: state.modalView.modalState,
-    Auth: state.Auth,
+    profile: state.profile,
 });
 
 Navbar.propTypes = {

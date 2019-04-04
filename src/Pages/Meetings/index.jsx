@@ -68,7 +68,7 @@ class Rooms extends Component {
 
 const mapStateToProps = state => ({
     roomList: state.roomList,
-    Auth: state.Auth,
+    profile: state.profile,
     eventList: state.eventList.events,
 });
 

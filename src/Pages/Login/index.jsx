@@ -13,7 +13,7 @@ class LoginPage extends Component {
     }
 
     render() {
-        if (this.props.Auth) {
+        if (this.props.profile) {
             return <Redirect to='/' />;
         }
         return <LoginContainer history={this.props.history} />;
@@ -22,7 +22,7 @@ class LoginPage extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-    Auth: state.Auth,
+    profile: state.profile,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 LoginPage.propTypes = {
     checkTokenFunction: PropTypes.func,
-    Auth: PropTypes.bool,
+    profile: PropTypes.bool,
     history: PropTypes.object,
 };
 

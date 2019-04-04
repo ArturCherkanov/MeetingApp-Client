@@ -12,7 +12,7 @@ class RegButton extends Component {
     };
 
     render() {
-        if (!this.props.Auth) {
+        if (!this.props.profile) {
             return <button className='create-button' onClick={()=>this.props.history.push('/registration')}>R</button>
         }
         return null;
@@ -25,10 +25,10 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 const mapStateToProps = (state) => ({
-    Auth: state.Auth,
+    profile: state.profile,
 });
 RegButton.propTypes = {
-    Auth: PropTypes.bool,
+    profile: PropTypes.bool,
     checkTokenFunction: PropTypes.func,
 };
 
