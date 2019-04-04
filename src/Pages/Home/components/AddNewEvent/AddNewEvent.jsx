@@ -3,11 +3,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import openSocket from 'socket.io-client';
-import Form from 'react-validation/build/form';
-import Input from 'react-validation/build/input';
-import Button from 'react-validation/build/button';
-import Select from 'react-validation/build/select';
-import Textarea from 'react-validation/build/textarea';
 
 import Users from './components/Users/';
 import Rooms from './components/Rooms/';
@@ -54,17 +49,33 @@ class AddNewEvent extends Component {
         this.props.addEvent(event, isAsyncLoadEvent);
 
     }
+
     setUsers = (userList) => {
         if (userList.length !== 0) {
             this.makeInputHandler('users', userList);
         }
-
     }
 
     makeInputHandler = (propName, value) => {
         this.setState({
             [propName]: value,
         });
+    }
+
+    setFields = () => {
+        if (this.props.data) {
+            let eventData = this.props.data;
+            this.makeInputHandler('name', eventData.name);
+            this.makeInputHandler('message', eventData.message);
+            this.makeInputHandler('minDate', eventData.minDate);
+            this.makeInputHandler('maxDate', eventData.maxDate);
+            this.makeInputHandler('room', eventData.room);
+            this.makeInputHandler('user', eventData.user);
+        }
+    }
+
+    componentDidMount() {
+        this.setFields()
     }
 
     render() {
