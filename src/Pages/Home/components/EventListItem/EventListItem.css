@@ -1,10 +1,11 @@
 :local(.eventItem){
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding-left: 20px;
+    justify-content: space-between;
     line-height: 40px;
+    padding: 0 20px;
     font-size: 15px;
+    box-sizing: border-box;
     font-weight: 600;
     height: 40px;
     width: 100%;
