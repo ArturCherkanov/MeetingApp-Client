@@ -15,7 +15,7 @@ export const get = (path, needAuth = false, params = null) => {
     const instance = axiosInstance(needAuth);
 
     // return new Promise((resolve, reject) => {
-    return instance.get(path, params)
+    return instance.get(path, params);
     // .then((response) => {
     //     resolve(response);
     // })

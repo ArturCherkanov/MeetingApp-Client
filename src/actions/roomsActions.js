@@ -9,7 +9,7 @@ export const getRooms = () => dispatch => {
                 payload: res.data,
             });
         });
-}
+};
 
 export const getFreeRoomList = () => dispatch => {
     getFreeRooms()

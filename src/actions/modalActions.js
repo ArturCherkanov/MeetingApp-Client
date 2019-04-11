@@ -1,6 +1,4 @@
-export const modalAction = (state) => {
-    return {
-        type: "SET_MODALSTATE",
-        payload: state
-    }
-}
+export const modalAction = (state) => ({
+    type: 'SET_MODALSTATE',
+    payload: state,
+});

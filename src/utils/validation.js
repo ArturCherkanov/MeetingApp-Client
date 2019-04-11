@@ -4,7 +4,7 @@ import moment from 'moment';
 
 export const password = (value, props, components) => {
     if (value !== components['confirm'][0].value) { // components['password'][0].value !== components['confirm'][0].value
-        return <div className="error-message">Passwords are not equal.</div>
+        return <div className="error-message">Passwords are not equal.</div>;
     }
 };
 export const required = (value) => {
@@ -16,14 +16,14 @@ export const required = (value) => {
 
 export const email = (value) => {
     if (!validator.isEmail(value)) {
-        return <div className="error-message">{value} is not a valid email.</div>
+        return <div className="error-message">{value} is not a valid email.</div>;
     }
 };
 
 export const secondDateValidation = (previosDate, value, handleRequest) => {
     if (value && previosDate === value) {
         let date = moment(value).add(1, 'm').format('YYYY-MM-DDTHH:MM');
-        console.log(previosDate, date)
+        console.log(previosDate, date);
         handleRequest('maxDate', date);
     }
 
@@ -44,8 +44,8 @@ export const approveSending = (formValues) => {
         }
     }
     return true;
-}
+};
 
 export const error = (val) => {
     if (!val) return true;
-}
+};
