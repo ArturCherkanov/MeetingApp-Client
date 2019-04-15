@@ -42,7 +42,7 @@ class Users extends Component {
 
                 <ChoisenUsers users={this.state.selectedUsers} />
 
-                <UserList userList={this.state.users} setSelectedUserList={this.setSelectedUserList}
+                <UserList userList={this.state.users} setSelectedUserList={this.props.setSelectedUserList}
                 />
             </div>
         );

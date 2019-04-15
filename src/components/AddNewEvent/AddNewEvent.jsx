@@ -61,6 +61,19 @@ class AddNewEvent extends Component {
 
     }
 
+    setSelectedUserList = event => {
+        let user = event.target.value;
+        let users = [...this.state.selectedUsers];
+
+        if (this.state.selectedUsers.indexOf(user) === -1 && user !== '') {
+            this.setState({ selectedUsers: [...users, user] });
+            console.log(this.state.selectedUsers);
+            this.setUsers([...users, user]);
+        }
+
+        return false;
+    }
+
     makeInputHandler = (propName, value) => {
         this.setState({
             [propName]: value,
@@ -103,7 +116,7 @@ class AddNewEvent extends Component {
                         </label>
                         <label className="addNEwEvent-Label">
                             <span>Name:</span>
-                            <Users setUsers={this.setUsers} />
+                            <Users setSelectedUserList={this.setSelectedUserList} />
                         </label>
                         <label className="addNEwEvent-Label">
                             <span>From:</span>
@@ -135,7 +148,8 @@ class AddNewEvent extends Component {
                             this.state.maxDate &&
                             <label className="addNEwEvent-Label">
                                 <span>Room</span>
-                                <Rooms validationDates={{ userFrom: this.state.minDate, userTo: this.state.maxDate }} room={this.state.room} setRoom={this.makeInputHandler} />
+                                <Rooms validationDates={{ userFrom: this.state.minDate,
+                                    userTo: this.state.maxDate }} room={this.state.room} setRoom={this.makeInputHandler} />
                             </label>
                         }
 
