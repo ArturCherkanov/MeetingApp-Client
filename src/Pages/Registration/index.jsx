@@ -9,14 +9,14 @@ import { isToken } from '../../actions/profileActions';
 class RegistrationPage extends Component {
 
     UNSAFE_componentWillMount() {
-        this.props.checkTokenFunction()
+        this.props.checkTokenFunction();
     }
 
     render() {
-        if (this.props.profile) {
+        if (this.props.profile.token) {
             return <Redirect to='/' />;
         }
-        return < RegistrationContainer history={this.props.history} />
+        return < RegistrationContainer history={this.props.history} />;
     }
 
 }

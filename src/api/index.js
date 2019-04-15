@@ -3,22 +3,21 @@ import { post, get } from './utils';
 import {
     API_PATH,
     EVENTS_PATH,
-    USERS_PATH,
-    TOKEN_PATH,
-    LOGOUT_PATH,
-    USERS_LIST,
+    USER_PATH,
+    USER_LIST,
     ROOM_PATH,
     VALIDATE_PATH,
+    AUTH_PATH,
 } from './paths';
 
 // Users
 
 export const addUserToDB = (userData) => (
-    post(API_PATH + USERS_PATH, false, userData)
+    post(API_PATH + AUTH_PATH, false, userData)
 );
 
 export const findUserInDB = (username, password) => (
-    get(API_PATH + USERS_PATH, false, {
+    get(API_PATH + AUTH_PATH, false, {
         params: {
             username: username,
             password: password,
@@ -44,21 +43,17 @@ export const getEvents = (date) => (
 );
 
 export const getToken = () => (
-    get(API_PATH + TOKEN_PATH, true, null)
+    get(API_PATH + USER_PATH, true, null)
 );
 
 export const getUserList = () => (
-    get(API_PATH + USERS_PATH + USERS_LIST, true, null)
+    get(API_PATH + USER_PATH + USER_LIST, true, null)
 );
 
 export const getRoomList = (dates) => (
     get(API_PATH + ROOM_PATH, true, {...dates})
 );
 
-
-export const logout = () => (
-    get(API_PATH + USERS_PATH + LOGOUT_PATH, true, null)
-);
 
 export const getFreeRooms = (dates) => (
     get(API_PATH + EVENTS_PATH + VALIDATE_PATH, true, {params: {...dates}})

@@ -8,7 +8,6 @@ import { isToken } from '../../../../actions/profileActions';
 class RegButton extends Component {
     logout = () => {
         localStorage.removeItem('token');
-        this.props.checkTokenFunction();
     };
 
     render() {
@@ -29,7 +28,6 @@ const mapStateToProps = (state) => ({
 });
 RegButton.propTypes = {
     profile: PropTypes.bool,
-    checkTokenFunction: PropTypes.func,
     history: PropTypes.object,
 };
 

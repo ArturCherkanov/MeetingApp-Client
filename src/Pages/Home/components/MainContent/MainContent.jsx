@@ -37,7 +37,7 @@ class MainContent extends Component {
             socket.emit('join', { token: token });
             socket.on('sendNotification', (req) => {
                 this.props.notificationAction(req);
-            })
+            });
         }
     }
 
@@ -78,7 +78,7 @@ class MainContent extends Component {
         }
     }
     render() {
-        const addNewEventCreateButton = () => this.props.profile ?
+        const addNewEventCreateButton = () => this.props.profile.token ?
             (<button className={mainStyles.addNewEventCreateButton + ' shadow'} onClick={this.activateWindow}>Create</button>) :
             (null);
         return (
@@ -116,7 +116,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     notificationAction: (state) => {
         dispatch(showNotificationAction(state));
-    }
+    },
 });
 
 const mapStateToProps = (state) => ({
