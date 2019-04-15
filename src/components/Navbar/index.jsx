@@ -7,6 +7,7 @@ import { isToken } from '../../actions/profileActions';
 import LogButton from './components/LogButton/logButton';
 import RegButton from './components/RegButton/';
 import ModalButton from './components/ModalButton/ModalButton';
+import RoomButton from './components/RoomButton/RoomButton';
 import mainStyles from './Navbar.css';
 
 
@@ -20,6 +21,7 @@ class Navbar extends Component {
     render() {
         return (
             <div className={mainStyles.navbar}>
+                <RoomButton profile={this.props.profile} history={this.props.history} />
                 <LogButton profile={this.props.profile} logout={this.logout} history={this.props.history} />
                 <RegButton history={this.props.history} />
                 <ModalButton />

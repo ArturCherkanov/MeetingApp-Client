@@ -46,7 +46,7 @@ class Rooms extends Component {
     render() {
         return (
             <>
-                <Navbar />
+                <Navbar history={this.props.history}/>
                 <div className="roomList">
                     <CurrentDate setTime={this.setTime} time={this.state.time} />
                     <div className="rommList-container">
