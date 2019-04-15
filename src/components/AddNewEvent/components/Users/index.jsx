@@ -35,9 +35,7 @@ class Users extends Component {
     componentDidMount() {
         this.getUsers();
     }
-    coco = () => {
-        console.log(1)
-    }
+
     render() {
         return (
             <div className={UsersStyle.userContainer}>

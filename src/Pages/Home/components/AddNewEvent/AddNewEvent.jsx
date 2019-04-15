@@ -103,7 +103,6 @@ class AddNewEvent extends Component {
         };
         let dateValidation = secondDateValidation(this.state.minDate, this.state.maxDate, this.makeInputHandler);
 
-
         return (
             <div className={'addNewEvent ' + (this.props.active ? ' active' : ' disabled')}>
                 <form className="addNewEvent-form">
