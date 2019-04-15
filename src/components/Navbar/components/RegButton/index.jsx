@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // remove waste logout functions
 import { logout } from '../../../../api/';
-import { isToken } from '../../../../actions/profileActions';
+import { profile } from '../../../../actions/profileActions';
 
 class RegButton extends Component {
     logout = () => {
@@ -20,7 +20,7 @@ class RegButton extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
     checkTokenFunction: () => {
-        dispatch(isToken());
+        dispatch(profile());
     },
 });
 const mapStateToProps = (state) => ({

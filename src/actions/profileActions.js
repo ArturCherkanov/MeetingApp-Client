@@ -1,6 +1,6 @@
 import { getToken } from '../api';
 
-export const isToken = () => dispatch => {
+export const profile = () => dispatch => {
     getToken()
         .then(res => {
             dispatch({

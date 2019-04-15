@@ -11,7 +11,7 @@ import EventList from '../EventList/EventList';
 import Notification from '../../../../components/NotificationAlert';
 
 import { modalAction } from '../../../../actions/modalActions';
-import { isToken } from '../../../../actions/profileActions';
+import { profile } from '../../../../actions/profileActions';
 import { getEventsFromDb } from '../../actions/currentEventListAction';
 import { showNotificationAction } from '../../../../actions/notificationActions';
 import { getRooms } from '../../../../actions/roomsActions';
@@ -108,7 +108,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(getEventsFromDb(state));
     },
     checkTokenFunction: () => {
-        dispatch(isToken());
+        dispatch(profile());
     },
     getRoomList: () => {
         dispatch(getRooms());

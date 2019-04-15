@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import RegistrationContainer from './components/Registration/Registration';
-import { isToken } from '../../actions/profileActions';
+import { profile } from '../../actions/profileActions';
 
 class RegistrationPage extends Component {
 
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     checkTokenFunction: () => {
-        dispatch(isToken());
+        dispatch(profile());
     },
 });
 

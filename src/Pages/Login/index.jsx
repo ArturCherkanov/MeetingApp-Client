@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import LoginContainer from './components/Login/Login';
-import { isToken } from '../../actions/profileActions';
+import { profile } from '../../actions/profileActions';
 
 class LoginPage extends Component {
 
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     checkTokenFunction: () => {
-        dispatch(isToken());
+        dispatch(profile());
     },
 });
 LoginPage.propTypes = {

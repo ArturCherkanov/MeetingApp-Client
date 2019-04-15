@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import LoginForm from '../LoginForm/loginForm';
 import { findUserInDB } from '../../../../api/';
-import { isToken } from '../../../../actions/profileActions';
+import { profile } from '../../../../actions/profileActions';
 
 import mainStyles from './Login.css';
 
@@ -37,7 +37,7 @@ class Login extends Component {
         findUserInDB(username, password)
             .then(res => localStorage.setItem('token', res.data.token))
             .then(() => this.props.checkTokenFunction())
-            // .then(() => this.props.history.push('/'));
+            .then(() => this.props.history.push('/'));
     }
 
     /*-----------END СUSTOM METHODS-----------*/
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     checkTokenFunction: () => {
-        dispatch(isToken());
+        dispatch(profile());
     },
 });
 Login.propTypes = {

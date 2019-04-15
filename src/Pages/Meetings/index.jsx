@@ -6,7 +6,7 @@ import CurrentDate from './components/Date';
 import Room from './components/Room';
 import { getRooms } from '../../actions/roomsActions';
 import Navbar from '../../components/Navbar';
-import { isToken } from '../../actions/profileActions';
+import { profile } from '../../actions/profileActions';
 import { getEventsFromDb } from '../../actions/eventsActions';
 import './index.css';
 import moment from 'moment';
@@ -75,7 +75,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
     checkToken: () => {
-        dispatch(isToken());
+        dispatch(profile());
     },
     getRoomList: () => {
         dispatch(getRooms());

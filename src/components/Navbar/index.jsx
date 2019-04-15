@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { modalAction } from '../../actions/modalActions';
-import { isToken } from '../../actions/profileActions';
+import { profile } from '../../actions/profileActions';
 import LogButton from './components/LogButton/logButton';
 import RegButton from './components/RegButton/';
 import ModalButton from './components/ModalButton/ModalButton';
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(modalAction(state));
     },
     checkTokenFunction: () => {
-        dispatch(isToken());
+        dispatch(profile());
     },
 });
 

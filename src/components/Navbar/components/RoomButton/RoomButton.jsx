@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { isToken } from '../../../../actions/profileActions';
+import { profile } from '../../../../actions/profileActions';
 import mainStyles from '../../Navbar.css';
 
 
@@ -22,7 +22,7 @@ class RoomButton extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
     checkTokenFunction: () => {
-        dispatch(isToken());
+        dispatch(profile());
     },
 });
 const mapStateToProps = (state) => ({
