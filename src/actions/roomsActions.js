@@ -1,5 +1,4 @@
-import { getFreeRooms } from '../api';
-import { getRoomList } from '../api';
+import { getFreeRooms, getRoomList } from '../api';
 
 export const getRooms = () => dispatch => {
     getRoomList()
