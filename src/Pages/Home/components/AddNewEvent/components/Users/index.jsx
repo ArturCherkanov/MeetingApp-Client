@@ -7,7 +7,6 @@ import { getUserList } from '../../../../../../api';
 import UserList from './components/UserList';
 import ChoisenUsers from './components/СhosenUsers';
 import UsersStyle from './Users.css';
-import {profile} from '../../../../../../actions/profileActions';
 
 
 class Users extends Component {
@@ -16,11 +15,16 @@ class Users extends Component {
         this.state = {
             users: [],
             selectedUsers: [],
+            addClass: false,
         };
     }
     getUsers = () => {
         getUserList()
             .then(res => { this.setState({ users: res.data }); });
+    }
+
+    toggle = () => {
+        this.setState({ addClass: !this.state.addClass });
     }
 
     setSelectedUserList = value => {
@@ -40,6 +44,11 @@ class Users extends Component {
     }
 
     render() {
+        let addToMeButtonClasses = ['add-me-button'];
+
+        if(this.state.addClass) { addToMeButtonClasses.push('disabled'); }
+
+
         return (
             <div className={UsersStyle.userContainer}>
 
@@ -47,7 +56,7 @@ class Users extends Component {
 
                 <UserList userList={this.state.users} setSelectedUserList={(e) => this.setSelectedUserList(e.target.value)}
                 />
-                <button className="add-me-button" onClick={e => { e.preventDefault(); this.setSelectedUserList(this.props.profile.email); }}>Add Me</button>
+                <button className={addToMeButtonClasses.join(' ')} onClick={e => { e.preventDefault(); this.setSelectedUserList(this.props.profile.email); this.toggle(); }}>Add Me</button>
             </div>
         );
     }
