@@ -1,5 +1,5 @@
 /* General Styles */
-  
+
   :local(.mainContent){
     display: flex;
     padding-top: 85px;
@@ -17,6 +17,8 @@
     border-radius: 3px;
     border: none;
     color: white;
-  }
+    font-size:20px;
+    text-transform: uppercase;
+    }
 
   /* End Button 'Create' */

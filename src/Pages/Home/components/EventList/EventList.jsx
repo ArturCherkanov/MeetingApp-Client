@@ -30,8 +30,8 @@ class EventList extends Component {
         return (
             <div className={mainStyles.eventListContainer}>
                 <h2 className={mainStyles.eventListHeader}>Event List</h2>
-                <input className={'default-input ' + mainStyles.eventListSearch + ' shadow'} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
-                <ul className={mainStyles.eventList + ' shadow'}>
+                <input className={'default-input ' + mainStyles.eventListSearch} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
+                <ul className={mainStyles.eventList}>
                     {visibleItems && visibleItems.map(elem => (
                         <EventListItem event={elem} setModalState={this.props.setModalStateFunction} setEditableEvent={this.props.setEditableEvent} key={elem._id} />
                     ))}

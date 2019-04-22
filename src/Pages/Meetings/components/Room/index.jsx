@@ -12,7 +12,7 @@ class Room extends Component {
 
     calcMarginSize = (timeFrom) => {
         let startDay = moment(this.props.time).startOf('day');
-        let min = moment(timeFrom).diff(startDay, 'minutes')
+        let min = moment(timeFrom).diff(startDay, 'minutes');
         let left = min / 14.4;
         return left + '%';
 
@@ -41,7 +41,7 @@ class Room extends Component {
                             left: left,
                             background: color,
                         };
-                        return (<div key={i} className='meeting-item' style={syles}>{'name: ' + e.name + ' description: ' + e.message + ' from:' + e.timeFrom + 'to: ' + e.timeTo}</div>);
+                        return (<div key={i} className='meeting-item' style={syles}><div>{'name: ' + e.name + ' description: ' + e.message + ' from:' + e.timeFrom + 'to: ' + e.timeTo}</div></div>);
                     })}
                 </div>
             </div>

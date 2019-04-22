@@ -3,21 +3,26 @@
     flex-direction: column;
     height: 100vh;
     min-height: 600px;
+    padding: 15px 15px 100px;
 }
 .meetingRoom,.meetingRoom>*{
     display: flex;
-    border: 1px solid;
     flex: 1;
 }
 .meetingLine{
-    flex:20;
+    flex: 20 1;
     position: relative;
     overflow: hidden;
-    background: #a0a096;
+    background: #e6e6e6;
+    border-bottom: 1px solid #969696;
+}
+.rommList-container .meetingRoom:last-child .meetingLine{
+    border-bottom: none;
 }
 .Room{
-    flex:1;
-    background:#90898982
+    flex: 1.5;
+    background:#42ca9d;
+    border: none;
 }
 .datePicker{
     margin-top: 60px;
@@ -32,24 +37,33 @@
 
 .rommList-container{
     height: 100%;
-    max-width:1120px;
+    max-width:1200px;
     width:100%;
     margin: 0 auto;
-    padding: 0 15px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    border: 1px solid #b8b4b4;
     flex: 1;
     cursor: pointer;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+    color: #fff;
 }
 .meeting-item{
-    border: 1px solid;
+    border-right: 1px solid #b8b4b4;
+    border-left: 1px solid #b8b4b4;
     display: flex;
     min-width: 1px;
     position: absolute;
-    overflow: auto;
+    color: #000;
+    box-sizing: border-box;
+    overflow: hidden;
     height: 100%;
-    background: #ac1f88;
+}
+
+.meeting-item>div{
+    overflow:auto;
+    padding: 5px 15px;
 }
 .timeLine{
     display:flex;
@@ -57,38 +71,31 @@
 }
 .roomListHead{
     display: flex;
-    border: 1px solid;
     height: 120px;
-    background:#90898982;
+    background:#1087ff;
 }
 .roomHead{
-    flex: 1;
-    border: 1px solid;
-    font-weight: 600;
+    flex: 1.5;
     text-transform: uppercase;
     word-break: break-word;
+    background: #42ca9d;
 }
 .hour{
     flex:1;
-    border: 1px solid;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 400;
 }
 .dateswitcher> button{
     border: none;
     color: white;
-    background: #644141;
+    background: #1087ff;
     transition: 0.3s all;
     cursor: pointer;
 }
 .dateswitcher> button:first-child{
-    border-radius: 50% 50% 0;
     margin-right: 10px;
 }
 .dateswitcher> button:last-child{
-    border-radius: 0 50% 50%;
     margin-left: 10px;
-}
-.dateswitcher> button:hover{
-    font-size: 25px;
 }

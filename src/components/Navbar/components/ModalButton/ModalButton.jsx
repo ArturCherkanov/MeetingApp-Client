@@ -9,9 +9,9 @@ import mainStyles from '../../Navbar.css';
 class ModalButton extends Component {
 
     render() {
-        if (this.props.profile.token) {
-            return <div className={mainStyles.addEvent} onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction(true); }}>+</div>;
-        }
+        // if (this.props.profile.token) {
+        //     return <div className={mainStyles.addEvent} onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction(true); }}>+</div>;
+        // }
         return null;
     }
 }

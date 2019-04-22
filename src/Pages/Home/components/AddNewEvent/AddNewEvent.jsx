@@ -108,18 +108,16 @@ class AddNewEvent extends Component {
                 <form className="addNewEvent-form">
                     <div className="addNewEvent-form-container">
                         <label className="addNEwEvent-Label">
-                            <span>Name</span>
                             <input type="text"
                                 id="Name"
+                                placeholder="Name"
                                 className="default-input"
                                 onChange={e => { this.makeInputHandler('name', e.target.value); }} />
                         </label>
                         <label className="addNEwEvent-Label">
-                            <span>Name:</span>
                             <Users setUsers={this.setUsers} />
                         </label>
                         <label className="addNEwEvent-Label">
-                            <span>From:</span>
                             <input type="datetime-local"
                                 step="1"
                                 className="default-input"
@@ -128,7 +126,6 @@ class AddNewEvent extends Component {
                                 }}
 
                             />
-                            <span>To:</span>
                             <input type="datetime-local"
                                 step="1"
                                 min={this.state.minDate}
@@ -141,21 +138,19 @@ class AddNewEvent extends Component {
                                 }} />
                         </label>
                         <label className="addNEwEvent-Label">
-                            <span>Notes:</span>
-                            <textarea className="default-input" onChange={e => { this.makeInputHandler('message', e.target.value); }}></textarea>
+                            <textarea className="default-input" placeholder="Notes:" onChange={e => { this.makeInputHandler('message', e.target.value); }}></textarea>
                         </label>
                         {
                             this.state.maxDate &&
                             <label className="addNEwEvent-Label">
-                                <span>Room</span>
                                 <Rooms validationDates={{ userFrom: this.state.minDate,
                                     userTo: this.state.maxDate }} room={this.state.room} setRoom={this.makeInputHandler} />
                             </label>
                         }
 
                         <div className="addNEwEvent-button-container">
-                            <button disabled={!isApprovedSending} className={!isApprovedSending ? 'disable-button' : 'addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
-                            <button className="addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
+                            <button disabled={!isApprovedSending} className={'button '+!isApprovedSending ? 'disable-button' : 'addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
+                            <button className="button addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
                         </div>
                     </div>
                 </form>

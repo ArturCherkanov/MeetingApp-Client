@@ -107,9 +107,9 @@ class AddNewEvent extends Component {
                 <form className="addNewEvent-form">
                     <div className="addNewEvent-form-container">
                         <label className="addNEwEvent-Label">
-                            <span>Name</span>
                             <input type="text"
                                 id="Name"
+                                placeholder="Name"
                                 className="default-input"
                                 onChange={e => { this.makeInputHandler('name', e.target.value); }} />
                         </label>
@@ -153,7 +153,7 @@ class AddNewEvent extends Component {
                         }
 
                         <div className="addNEwEvent-button-container">
-                            <button disabled={!isApprovedSending} className={!isApprovedSending ? 'disable-button' : 'addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
+                            <button disabled={!isApprovedSending} className={'button '+!isApprovedSending ? 'disable-button' : 'addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
                             <button className="addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
                         </div>
                     </div>

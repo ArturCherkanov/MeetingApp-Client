@@ -14,8 +14,8 @@ class UserList extends Component {
     render() {
         return (
             <>
-                <select className="default-input" value={this.state.currentuser} onChange={(e) => { this.props.setSelectedUserList(e); }}>
-                    <option></option>
+                <select className="default-input" placeholder="User" value={this.state.currentuser} onChange={(e) => { this.props.setSelectedUserList(e); }}>
+                    <option value="">Users</option>
                     {this.props.userList.length !== 0 && this.props.userList.map((user, i) => (
                         <User key={i} name={user.name} email={user.email} />
                     ))}

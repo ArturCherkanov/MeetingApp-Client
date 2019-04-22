@@ -15,9 +15,9 @@ import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faSignInAlt, faSignOutAlt, faCalendarMinus, faHome, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faEdit);
+library.add(faEdit, faSignInAlt, faCalendarMinus, faHome, faUserPlus, faSignOutAlt);
 
 class App extends Component {
     componentDidMount() {

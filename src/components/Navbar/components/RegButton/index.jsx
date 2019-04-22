@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 // remove waste logout functions
 import { logout } from '../../../../api/';
 import { profile } from '../../../../actions/profileActions';
@@ -11,9 +13,11 @@ class RegButton extends Component {
     };
 
     render() {
-        if (!this.props.profile) {
-            return <button className='create-button' onClick={() => this.props.history.push('/registration')}>R</button>;
+        if (!this.props.profile.token) {
+            console.log(this.props.profile);
+            return <button className='button create-button' onClick={() => this.props.history.push('/registration')}><FontAwesomeIcon icon="user-plus" /></button>;
         }
+        console.log(this.props.profile);
         return null;
     }
 }

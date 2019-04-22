@@ -25,7 +25,6 @@ class Users extends Component {
 
         if (this.state.selectedUsers.indexOf(user) === -1 && user !== '') {
             this.setState({ selectedUsers: [...users, user] });
-            console.log(this.state.selectedUsers);
             this.props.setUsers([...users, user]);
         }
 
