@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import openSocket from 'socket.io-client';
+import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 
 import Users from './components/Users/';
 import Rooms from './components/Rooms/';
@@ -24,6 +25,8 @@ class AddNewEvent extends Component {
             name: undefined,
             room: undefined,
             users: undefined,
+            isOpen: false,
+            date: [new Date(), new Date()],
         };
     }
 
@@ -80,6 +83,16 @@ class AddNewEvent extends Component {
         }
     }
 
+    handleChange() {
+        // this.setState({startDate: date});
+        this.toggleCalendar();
+    }
+
+    toggleCalendar(e) {
+        e && e.preventDefault();
+        this.setState({ isOpen: !this.state.isOpen });
+    }
+
     render() {
 
         let isApprovedSending = approveSending(this.state);
@@ -118,38 +131,18 @@ class AddNewEvent extends Component {
                             <Users setUsers={this.setUsers} />
                         </label>
                         <label className="addNEwEvent-Label">
-                            <input type="datetime-local"
-                                step="1"
-                                className="default-input"
-                                onChange={e => {
-                                    this.makeInputHandler('minDate', e.target.value);
-                                }}
-
-                            />
-                            <input type="datetime-local"
-                                step="1"
-                                min={this.state.minDate}
-                                className="default-input"
-                                value={this.state.maxDate}
-                                onChange={e => {
-                                    this.makeInputHandler('maxDate', e.target.value);
-                                    // secondDateValidation(this.state.minDate, this.state.maxDate, this.makeInputHandler);
-
-                                }} />
-                        </label>
-                        <label className="addNEwEvent-Label">
                             <textarea className="default-input" placeholder="Notes:" onChange={e => { this.makeInputHandler('message', e.target.value); }}></textarea>
                         </label>
-                        {
-                            this.state.maxDate &&
-                            <label className="addNEwEvent-Label">
-                                <Rooms validationDates={{ userFrom: this.state.minDate,
-                                    userTo: this.state.maxDate }} room={this.state.room} setRoom={this.makeInputHandler} />
-                            </label>
-                        }
 
+                        <div>
+                            <DateTimeRangePicker
+                                className={'default-input datetimerange-picker'}
+                                onChange={date => this.makeInputHandler('date', date)}
+                                value={this.state.date}
+                            />
+                        </div>
                         <div className="addNEwEvent-button-container">
-                            <button disabled={!isApprovedSending} className={'button '+!isApprovedSending ? 'disable-button' : 'addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
+                            <button disabled={!isApprovedSending} className={'button ' + !isApprovedSending ? 'disable-button' : 'addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
                             <button className="button addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
                         </div>
                     </div>

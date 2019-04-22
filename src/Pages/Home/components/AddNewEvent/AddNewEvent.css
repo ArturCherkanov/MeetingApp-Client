@@ -55,10 +55,11 @@
   .add-me-button{
     background: none;
     border: none;
-    color: white;
+    color: hsl(0, 0%, 2%);
     text-decoration: underline;
     margin-bottom: 20px;
     margin-right: 0;
+    text-transform: uppercase;
     margin-left: auto;
     position: relative;
     cursor: pointer;
