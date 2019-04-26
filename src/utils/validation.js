@@ -23,17 +23,12 @@ export const email = (value) => {
 export const secondDateValidation = (previosDate, value, handleRequest) => {
     if (value && previosDate === value) {
         let date = moment(value).add(1, 'm').format('YYYY-MM-DDTHH:MM');
-        console.log(previosDate, date);
         handleRequest('maxDate', date);
     }
 
     else if (moment(value).isBefore(previosDate)) {
         handleRequest('maxDate', '');
         handleRequest('room', '');
-    }
-
-    else {
-
     }
 
 };

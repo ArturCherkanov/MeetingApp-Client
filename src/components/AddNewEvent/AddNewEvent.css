@@ -9,8 +9,14 @@
     background: rgba(0,0,0,0.2);
     z-index: 3;
   }
-  .disable-button{
+
+  .disable-button:disabled{
     background: gray;
+    color: #b8b4b4;
+    border: none;
+  }
+  .disable-button{
+    background: red;
     color: #b8b4b4;
     border: none;
   }

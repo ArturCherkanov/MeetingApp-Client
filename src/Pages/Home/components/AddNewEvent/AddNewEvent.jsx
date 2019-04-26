@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import openSocket from 'socket.io-client';
-import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
+import DateTimePicker from 'react-datetime-picker';
 
 import Users from './components/Users/';
 import Rooms from './components/Rooms/';
 import { modalAction } from '../../../../actions/modalActions';
-// import { refresh } from '../../../../actions/profileAction';
 import { addDataToDb } from '../../../../actions/eventsActions';
-import { error, required, approveSending, secondDateValidation } from '../../../../utils/validation';
+import { error, required, approveSending } from '../../../../utils/validation';
 // Need to split by components
 import './AddNewEvent.css';
 
@@ -20,13 +19,11 @@ class AddNewEvent extends Component {
         super(props);
         this.state = {
             message: undefined,
-            minDate: undefined,
-            maxDate: undefined,
+            minDate: new Date(),
+            maxDate: new Date(),
             name: undefined,
             room: undefined,
             users: undefined,
-            isOpen: false,
-            date: [new Date(), new Date()],
         };
     }
 
@@ -63,18 +60,6 @@ class AddNewEvent extends Component {
         this.setState({
             [propName]: value,
         });
-    }
-
-    setFields = () => {
-        if (this.props.data) {
-            let eventData = this.props.data;
-            this.makeInputHandler('name', eventData.name);
-            this.makeInputHandler('message', eventData.message);
-            this.makeInputHandler('minDate', eventData.minDate);
-            this.makeInputHandler('maxDate', eventData.maxDate);
-            this.makeInputHandler('room', eventData.room);
-            this.makeInputHandler('user', eventData.user);
-        }
     }
 
     componentDidMount() {
@@ -114,7 +99,6 @@ class AddNewEvent extends Component {
                 name: this.state.name,
             });
         };
-        let dateValidation = secondDateValidation(this.state.minDate, this.state.maxDate, this.makeInputHandler);
 
         return (
             <div className={'addNewEvent ' + (this.props.active ? ' active' : ' disabled')}>
@@ -135,14 +119,28 @@ class AddNewEvent extends Component {
                         </label>
 
                         <div>
-                            <DateTimeRangePicker
-                                className={'default-input datetimerange-picker'}
-                                onChange={date => this.makeInputHandler('date', date)}
-                                value={this.state.date}
+                            <DateTimePicker
+                                onChange={(date) => { this.makeInputHandler('minDate', date); }}
+                                value={this.state.minDate}
+                                minDate={new Date()}
                             />
+                            <DateTimePicker
+                                onChange={(date) => { this.makeInputHandler('maxDate', date); }}
+                                value={this.state.maxDate}
+                                minDate={this.state.minDate}
+                            />
+                            {
+                                this.state.maxDate && this.state.minDate &&
+                                <label className="addNEwEvent-Label">
+                                    <Rooms validationDates={{
+                                        userFrom: this.state.minDate,
+                                        userTo: this.state.maxDate,
+                                    }} room={this.state.room} setRoom={this.makeInputHandler} />
+                                </label>
+                            }
                         </div>
                         <div className="addNEwEvent-button-container">
-                            <button disabled={!isApprovedSending} className={'button ' + !isApprovedSending ? 'disable-button' : 'addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
+                            <button disabled={!isApprovedSending} className={'button ' + !isApprovedSending ? 'button disable-button' : 'button addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
                             <button className="button addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
                         </div>
                     </div>
@@ -168,7 +166,6 @@ AddNewEvent.propTypes = {
     active: PropTypes.bool,
     addEvent: PropTypes.func,
     eventList: PropTypes.object,
-    data: PropTypes.object,
 };
 
 const mapDispatchToProps = (dispatch) => ({

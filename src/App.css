@@ -41,7 +41,8 @@ h2{
   transition: all 0.2s;
 }
 
-.react-datetimerange-picker__wrapper{
+
+.react-datetime-picker__wrapper, .react-datetimerange-picker__wrapper{
   border: none;
 }
 
@@ -61,6 +62,7 @@ h2{
   margin: 0 auto;
   padding: 0 15px;
 }
+
 .button{
   border-radius: 4px;
   transition: all 0.3s;
@@ -86,6 +88,11 @@ h2{
   /* width: 40px; */
   font-size: 32px;
 }
+
+.react-calendar__tile:disabled,.react-calendar__navigation button[disabled]{
+  background-color: #76baff;
+}
+
 .cancel-button {
   color: #fff;
   background: #f87575;

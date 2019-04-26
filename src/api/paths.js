@@ -18,3 +18,5 @@ export const ROOM_PATH = '/rooms/';
 //validate room
 
 export const VALIDATE_PATH = 'validate/';
+
+export const IMAGE_PATH = '/image/';

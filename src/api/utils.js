@@ -25,11 +25,11 @@ export const get = (path, needAuth = false, params = null) => {
     // });
 };
 
-export const post = (path, needAuth = false, data) => {
+export const post = (path, needAuth = false, data, params=null) => {
     const instance = axiosInstance(needAuth);
 
     return new Promise((resolve, reject) => {
-        instance.post(path, data)
+        instance.post(path, data, params)
             .then((response) => {
                 resolve(response);
             })

@@ -22,3 +22,7 @@
     padding: 10px 20px;
     margin-top: 10px;
   }
+
+  .image-uploader .fileUploader p {
+    display: none;
+  }
