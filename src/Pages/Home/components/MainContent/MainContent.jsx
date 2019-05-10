@@ -78,7 +78,7 @@ class MainContent extends Component {
         }
     }
     render() {
-        const addNewEventCreateButton = () => this.props.profile.token ?
+        const addNewEventCreateButton = () => this.props.profile.isLoggedIn ?
             (<button className={mainStyles.addNewEventCreateButton+' button'} onClick={this.activateWindow}>Create</button>) :
             (null);
         return (

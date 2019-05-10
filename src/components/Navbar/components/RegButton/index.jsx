@@ -13,11 +13,9 @@ class RegButton extends Component {
     };
 
     render() {
-        if (!this.props.profile.token) {
-            console.log(this.props.profile);
+        if (!this.props.profile.isLoggedIn) {
             return <button className='button create-button' onClick={() => this.props.history.push('/registration')}><FontAwesomeIcon icon="user-plus" /></button>;
         }
-        console.log(this.props.profile);
         return null;
     }
 }

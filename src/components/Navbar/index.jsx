@@ -22,12 +22,14 @@ class Navbar extends Component {
         return (
             <div className={mainStyles.navbar}>
                 <RoomButton profile={this.props.profile} history={this.props.history} />
+                { this.props.profile.isLoggedIn &&
+                <div className={mainStyles.profile}>
+                    <img className={mainStyles.profileImg+' button'} onClick={() => this.props.history.push('/profile')} src={this.props.profile.profilePhoto} />
+                </div>
+                }
                 <LogButton profile={this.props.profile} logout={this.logout} history={this.props.history} />
                 <RegButton history={this.props.history} />
                 <ModalButton />
-                <div className={mainStyles.profile}>
-                    <span className={mainStyles.profileImg}></span>
-                </div>
             </div>);
     }
 }

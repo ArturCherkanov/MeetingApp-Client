@@ -27,7 +27,7 @@ class RegistrationContainer extends Component {
     createUser = (e, userData) => {
         e.preventDefault();
         addUserToDB(userData)
-            .then(res => { localStorage.setItem('token', res.data.token); })
+            .then(res => { localStorage.setItem('token', res.data.isLoggedIn); })
             .then(() => this.props.history.push('/'));
     }
 

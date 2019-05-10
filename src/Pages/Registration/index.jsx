@@ -13,7 +13,7 @@ class RegistrationPage extends Component {
     }
 
     render() {
-        if (this.props.profile.token) {
+        if (this.props.profile.isLoggedIn) {
             return <Redirect to='/' />;
         }
         return < RegistrationContainer history={this.props.history} />;

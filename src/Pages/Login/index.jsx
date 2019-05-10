@@ -13,7 +13,7 @@ class LoginPage extends Component {
     }
 
     render() {
-        if (this.props.profile.token) {
+        if (this.props.profile.isLoggedIn) {
             return <Redirect to='/' />;
         }
         return <LoginContainer history={this.props.history} />;

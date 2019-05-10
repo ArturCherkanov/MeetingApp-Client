@@ -2,7 +2,6 @@ const initialState = {
     isLoggedIn: false,
     email: null,
     profilePhoto: null,
-
 };
 
 export default function (state = initialState, action) {
@@ -11,10 +10,14 @@ export default function (state = initialState, action) {
         return {
             profilePhoto: action.payload.photoPath,
             email: action.payload.email,
-            token: action.payload.token,
+            isLoggedIn: action.payload.isLoggedIn,
         };
     case 'WRONG_TOKEN':
-        return action.payload;
+        return {
+            isLoggedIn: false,
+            email: null,
+            profilePhoto: null,
+        };
     default:
         return state;
     }

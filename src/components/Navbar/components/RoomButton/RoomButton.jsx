@@ -10,7 +10,7 @@ import mainStyles from '../../Navbar.css';
 class RoomButton extends Component {
 
     render() {
-        if (this.props.profile.token) {
+        if (this.props.profile.isLoggedIn) {
             if (this.props.history.location.pathname === '/rooms') {
                 return <button className={'button '+mainStyles.roomsButton} onClick={() => this.props.history.push('/')}><FontAwesomeIcon icon="home" /></button>;
             }
