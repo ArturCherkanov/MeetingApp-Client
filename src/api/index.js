@@ -43,7 +43,7 @@ export const getEvents = (date) => (
     })
 );
 
-export const getToken = () => (
+export const getUser = () => (
     get(API_PATH + USER_PATH, true, null)
 );
 

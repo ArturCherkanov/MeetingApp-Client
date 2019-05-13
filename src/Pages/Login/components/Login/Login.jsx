@@ -35,7 +35,8 @@ class Login extends Component {
     authActions = (e, username, password) => {
         e.preventDefault();
         findUserInDB(username, password)
-            .then(res => localStorage.setItem('token', res.data.isLoggedIn))
+            .then(res =>
+                localStorage.setItem('token', res.data.token))
             .then(() => this.props.checkTokenFunction())
             .then(() => this.props.history.push('/'));
     }

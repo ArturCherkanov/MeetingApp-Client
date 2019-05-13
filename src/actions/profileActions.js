@@ -1,7 +1,7 @@
-import { getToken } from '../api';
+import { getUser } from '../api';
 
 export const profile = () => dispatch => {
-    getToken()
+    getUser()
         .then(res => {
             dispatch({
                 type: 'RIGHT_TOKEN',

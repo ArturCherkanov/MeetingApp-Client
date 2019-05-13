@@ -29,7 +29,7 @@ class MainContent extends Component {
     }
 
     componentDidMount() {
-        this.props.checkTokenFunction();
+        this.props.getProfile();
         let token = localStorage.getItem('token');
         if (token) {
             this.props.getRoomList();
@@ -107,7 +107,7 @@ const mapDispatchToProps = (dispatch) => ({
     getEventsByDate: (state) => {
         dispatch(getEventsFromDb(state));
     },
-    checkTokenFunction: () => {
+    getProfile: () => {
         dispatch(profile());
     },
     getRoomList: () => {
@@ -133,7 +133,7 @@ MainContent.propTypes = {
     eventList: PropTypes.array,
     profile: PropTypes.bool,
     getRoomList: PropTypes.func,
-    checkTokenFunction: PropTypes.func,
+    getProfile: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
