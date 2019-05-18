@@ -1,3 +1,14 @@
+input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:-internal-autofill-previewed, textarea:-internal-autofill-selected, select:-internal-autofill-previewed, select:-internal-autofill-selected{
+  background: #fff!important;
+}
+*{
+  outline: none;
+}
+
+h2{
+  font-weight: 400;
+}
+
 .p-0{
   padding: 0;
 }
@@ -10,11 +21,14 @@
   display: block;
 }
 
+#root {
+  background: #fafafa;
+}
+
 .main-content{
   position: relative;
   height: 100vh;
   width: 100%;
-  background: #b1c7e8;
 }
 
 .default-input{
@@ -22,7 +36,18 @@
   padding: 10px;
   border: none;
   border-radius: 2px;
-  background: #f4f5f7;
+  background: none;
+  border-bottom: 1px solid #000;
+  transition: all 0.2s;
+}
+
+
+.react-datetime-picker__wrapper, .react-datetimerange-picker__wrapper{
+  border: none;
+}
+
+.default-input:hover, .default-input:active,.default-input:focus{
+  border-bottom: 3px solid #000;
 }
 .file{
   padding: 0;
@@ -36,4 +61,52 @@
   display: block;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+.button{
+  border-radius: 4px;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12);
+}
+.button:hover{
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+.success-button {
+  color: #fff;
+  background: #a0a096;
+  border: none;
+  font-size: 32px;
+  margin-right: 20px;
+}
+.create-button{
+  color: #fff;
+  background: #42ca9d;
+  border: none;
+  /* width: 40px; */
+  font-size: 32px;
+}
+
+.react-calendar__tile:disabled,.react-calendar__navigation button[disabled]{
+  background-color: #76baff;
+}
+
+.cancel-button {
+  color: #fff;
+  background: #f87575;
+  border: none;
+  width: 40px;
+  font-size: 32px;
+  /* margin-right: 20px; */
+  box-sizing: content-box;
+}
+.addNewEvent-create-button{
+  align-self: center;
+    padding: 10px;
+    background: #42ca9d;
+    border-radius: 3px;
+    border: none;
+    color: white;
 }

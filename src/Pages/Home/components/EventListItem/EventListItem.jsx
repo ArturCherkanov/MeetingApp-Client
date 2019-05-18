@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
-
-import mainStyles from './EventListItem.css'
+import PropTypes from 'prop-types';
+import AddNewEvent from '../AddNewEvent/AddNewEvent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import mainStyles from './EventListItem.css';
 
 class EventListItem extends Component {
     render() {
         return (
             <li className={mainStyles.eventItem} data-value={this.props.event}>
-                <span>{this.props.event.time + " / " + this.props.event.message}</span>
+                <span>Start at:{this.props.event.timeFrom + ' / ' + this.props.event.name}</span>
+                <FontAwesomeIcon icon="edit" onClick={() => {
+                    this.props.setModalState(true);
+                    this.props.setEditableEvent(this.props.event);
+                }} />
             </li>
-        )
+        );
     }
 }
+
+EventListItem.propTypes = {
+    timeFrom: PropTypes.string,
+    // message: PropTypes.string,
+    event: PropTypes.object,
+    setModalState: PropTypes.func,
+    setEditableEvent: PropTypes.func,
+};
 
 export default EventListItem;

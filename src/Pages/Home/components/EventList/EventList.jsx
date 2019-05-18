@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import EventListItem from '../EventListItem/EventListItem'
+import EventListItem from '../EventListItem/EventListItem';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
-import { getDataFromDb } from '../../actions/currentEventListAction';
-import { refresh } from '../../../../actions/isRefreshAction';
+import { getEventsFromDb, setEditableEvent } from '../../actions/currentEventListAction';
+// import { refresh } from '../../../../actions/profileAction';
+import { modalAction } from '../../../../actions/modalActions';
 
-import mainStyles from './EventList.css'
+
+import mainStyles from './EventList.css';
 
 
 class EventList extends Component {
@@ -17,36 +20,23 @@ class EventList extends Component {
         };
     }
 
-    componentWillReceiveProps(next) {
-
-        // Reset selected date 
-
-        // if (next.chosenEventOnCaledar !== this.props.chosenEventOnCaledar && next.chosenEventOnCaledar != null) {
-        //     this.props.update(false);
-        // }
-
-        // if (next.refresh !== this.props.refresh && next.refresh) {
-        //     this.refresh()
-        // }
+    componentDidMount() {
+        this.props.getEventsFromDb(moment().format('YYYY-MM-DD'));
     }
 
-    componentWillMount() {
-        this.props.getDataFromDb();
-    }
-    
     render() {
-        const visibleItems = this.getVisibleItems(this.props.eventList.events, this.state.searchQuery, this.selectedEventToggle(), this.props.refresh);
+        const visibleItems = this.getVisibleItems(this.props.eventList.events, this.state.searchQuery, this.props.chosenEventOnCaledar);
 
         return (
             <div className={mainStyles.eventListContainer}>
                 <h2 className={mainStyles.eventListHeader}>Event List</h2>
-                <input className={"default-input " + mainStyles.eventListSearch + " shadow"} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
-                <ul className={mainStyles.eventList  + " shadow"}>
-                    {visibleItems&&visibleItems.map(elem => (
-                        <EventListItem event={elem} key={elem._id} />
+                <input className={'default-input ' + mainStyles.eventListSearch} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
+                <ul className={mainStyles.eventList}>
+                    {visibleItems && visibleItems.map(elem => (
+                        <EventListItem event={elem} setModalState={this.props.setModalStateFunction} setEditableEvent={this.props.setEditableEvent} key={elem._id} />
                     ))}
                 </ul>
-                <span className={mainStyles.viewAll} onClick={this.refresh}>Refresh</span>
+                {/* <span className={mainStyles.viewAll} onClick={this.refresh}>Refresh</span> */}
             </div>
         );
     }
@@ -57,11 +47,6 @@ class EventList extends Component {
 
         // selected date will refreshed straight after refresh
 
-        if (!this.props.refresh) {
-            return this.props.chosenEventOnCaledar
-        } else {
-            return null
-        }
     }
 
     refresh = () => {
@@ -69,23 +54,35 @@ class EventList extends Component {
         // setting flag and getting data after refresh
 
         this.props.update(true);
-        this.props.getDataFromDb();
+        // this.props.getDataFromDb();
     }
 
     // function for computing current events by different queries
 
-    getVisibleItems = (list, search = null, selectedDate = null, refreshed = false) => {
+    getVisibleItems = (list = null, search = null, selectedDate = null) => {
 
+        let currentDate = moment().format('YYYY-MM-DD');
+        let visibleItems = list[currentDate];
         let searchQuery = search.toLowerCase();
 
-        if ((!searchQuery && !selectedDate) || (!searchQuery && !selectedDate && refreshed)) {
-            return list[0];
-        } else if (!search && selectedDate) {
-            return selectedDate;
-        } else if (search && selectedDate) {
-            return selectedDate.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        if (selectedDate) {
+            const test = selectedDate.toString();
+            const date = moment(test).format('YYYY-MM-DD');
+            visibleItems = list[date];
         }
-        return list[0].filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        if (searchQuery) {
+            visibleItems = visibleItems.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        }
+        // //THH:mm:ss.SSS
+        // console.log(currentDate);
+        // if ((!searchQuery && !selectedDate) || (!searchQuery && !selectedDate && refreshed)) {
+        //     // return list.filter(event => event.time.indexOf(currentDate)!==-1);
+        // } else if (!search && selectedDate) {
+        //     return selectedDate;
+        // } else if (search && selectedDate) {
+        //     return selectedDate.filter(eventName => (eventName.message.toLowerCase().includes(searchQuery)));
+        // }
+        return visibleItems;
     }
 
     handleSearchInputChange = (e) => {
@@ -100,29 +97,40 @@ class EventList extends Component {
 
 
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getDataFromDb: () => {
-            dispatch(getDataFromDb())
-        },
-        update: state => {
-            dispatch(refresh(state))
-        }
-    }
-}
+const mapDispatchToProps = dispatch => ({
+    getEventsFromDb: (date) => {
+        dispatch(getEventsFromDb(date));
+    },
+    // update: state => {
+    //     dispatch(refresh(state));
+    // },
+    setModalStateFunction: state => {
+        dispatch(modalAction(state));
+    },
+    setEditableEvent: state => {
+        dispatch(setEditableEvent(state));
+    },
+});
 
-const mapStateToProps = state => {
-    return {
-        eventList: state.eventList,
-        refresh: state.refresh
-    }
-}
+const mapStateToProps = state => ({
+    eventList: state.eventList,
+    // refresh: state.refresh,
+    modalState: state.modalView.modalState,
+});
+
+
+/*-----------VALIDATION-----------*/
+
 
 EventList.propTypes = {
-    EventList: PropTypes.func,
-    refresh: PropTypes.bool,
+    chosenEventOnCaledar: PropTypes.array,
+    eventList: PropTypes.object,
+    // refresh: PropTypes.bool,
     update: PropTypes.func,
-}
+    getEventsFromDb: PropTypes.func,
+    setModalStateFunction: PropTypes.func,
+    setEditableEvent: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);
 

@@ -1,0 +1,28 @@
+.register-form{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 50%;
+    max-width: 400px;
+  }
+  .register-form>div{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .error-message{
+    color:red;
+    margin-top: -19px;
+  }
+
+  .register-button{
+    color: #fff;
+    background-color: #2196f3;
+    padding: 10px 20px;
+    margin-top: 10px;
+  }
+
+  .image-uploader .fileUploader p {
+    display: none;
+  }

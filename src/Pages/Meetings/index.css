@@ -1,0 +1,101 @@
+.roomList{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 600px;
+    padding: 15px 15px 100px;
+}
+.meetingRoom,.meetingRoom>*{
+    display: flex;
+    flex: 1;
+}
+.meetingLine{
+    flex: 20 1;
+    position: relative;
+    overflow: hidden;
+    background: #e6e6e6;
+    border-bottom: 1px solid #969696;
+}
+.rommList-container .meetingRoom:last-child .meetingLine{
+    border-bottom: none;
+}
+.Room{
+    flex: 1.5;
+    background:#42ca9d;
+    border: none;
+}
+.datePicker{
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    height: 50px;
+}
+.dateswitcher{
+    width: 100%;
+}
+
+.rommList-container{
+    height: 100%;
+    max-width:1200px;
+    width:100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #b8b4b4;
+    flex: 1;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+    color: #fff;
+}
+.meeting-item{
+    border-right: 1px solid #b8b4b4;
+    border-left: 1px solid #b8b4b4;
+    display: flex;
+    min-width: 1px;
+    position: absolute;
+    color: #000;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100%;
+}
+
+.meeting-item>div{
+    overflow:auto;
+    padding: 5px 15px;
+}
+.timeLine{
+    display:flex;
+    flex: 20;
+}
+.roomListHead{
+    display: flex;
+    height: 120px;
+    background:#1087ff;
+}
+.roomHead{
+    flex: 1.5;
+    text-transform: uppercase;
+    word-break: break-word;
+    background: #42ca9d;
+}
+.hour{
+    flex:1;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 400;
+}
+.dateswitcher> button{
+    border: none;
+    color: white;
+    background: #1087ff;
+    transition: 0.3s all;
+    cursor: pointer;
+}
+.dateswitcher> button:first-child{
+    margin-right: 10px;
+}
+.dateswitcher> button:last-child{
+    margin-left: 10px;
+}

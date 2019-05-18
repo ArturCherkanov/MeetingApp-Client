@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import LoginForm from '../../../../components/LoginForm/LoginForm';
-import { addUserToDB } from '../../../../api/'
+import LoginForm from '../LoginForm/loginForm';
+import { findUserInDB } from '../../../../api/';
+import { profile } from '../../../../actions/profileActions';
 
-import mainStyles from './Login.css'
+import mainStyles from './Login.css';
 
-class Registation extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password: ''
-        }
+            password: '',
+        };
     }
+
+
     render() {
         return (
             <div className="main-content">
                 <div className="container">
                     <div className={mainStyles.formContainer}>
                         <h1 className="d-block">Login</h1>
-                        <LoginForm buttonName={'Login'} submitFunction={this.findUser} />
+                        <LoginForm buttonName={'Login'} submitFunction={this.authActions} />
                     </div>
                 </div>
             </div>
@@ -28,12 +32,30 @@ class Registation extends Component {
     }
     /*-----------СUSTOM METHODS-----------*/
 
-    findUser = (e, username, password) => {
+    authActions = (e, username, password) => {
         e.preventDefault();
-        
+        findUserInDB(username, password)
+            .then(res =>
+                localStorage.setItem('token', res.data.token))
+            .then(() => this.props.checkTokenFunction())
+            .then(() => this.props.history.push('/'));
     }
 
     /*-----------END СUSTOM METHODS-----------*/
 }
 
-export default connect()(Registation);
+const mapStateToProps = (state) => ({
+    profile: state.profile,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    checkTokenFunction: () => {
+        dispatch(profile());
+    },
+});
+Login.propTypes = {
+    checkTokenFunction: PropTypes.func,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
