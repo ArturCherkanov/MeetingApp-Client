@@ -1,3 +1,5 @@
+export const IP_PATH = 'http://localhost:3001';
+
 // API
 export const API_PATH = '/api';
 

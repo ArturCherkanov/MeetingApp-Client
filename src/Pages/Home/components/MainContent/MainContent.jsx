@@ -15,6 +15,7 @@ import { profile } from '../../../../actions/profileActions';
 import { getEventsFromDb } from '../../actions/currentEventListAction';
 import { showNotificationAction } from '../../../../actions/notificationActions';
 import { getRooms } from '../../../../actions/roomsActions';
+import {API_PATH} from '../../../../api/paths';
 
 import './Calendar.css';
 import mainStyles from './MainContent.css';
@@ -33,7 +34,7 @@ class MainContent extends Component {
         let token = localStorage.getItem('token');
         if (token) {
             this.props.getRoomList();
-            const socket = openSocket('http://192.168.11.65:3001');
+            const socket = openSocket(API_PATH);
             socket.emit('join', { token: token });
             socket.on('sendNotification', (req) => {
                 this.props.notificationAction(req);
@@ -134,6 +135,7 @@ MainContent.propTypes = {
     profile: PropTypes.bool,
     getRoomList: PropTypes.func,
     getProfile: PropTypes.func,
+    notificationAction: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);

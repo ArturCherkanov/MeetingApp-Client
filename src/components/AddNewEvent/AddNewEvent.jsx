@@ -15,6 +15,8 @@ import { modalAction } from '../../actions/modalActions';
 import { refresh } from '../../actions/profileActions';
 import { addDataToDb } from '../../actions/eventsActions';
 import { error, required, approveSending, secondDateValidation } from '../../utils/validation';
+import {IP_PATH} from '../../api/paths'
+
 // Need to split by components
 import './AddNewEvent.css';
 
@@ -92,7 +94,7 @@ class AddNewEvent extends Component {
                 this.state.users,
             );
             this.props.setModalStateFunction(false);
-            const socket = openSocket('http://192.168.11.65:3001');
+            const socket = openSocket(IP_PATH);
             socket.emit('sendUsers', {
                 users: this.state.users,
                 date: this.state.minDate,
