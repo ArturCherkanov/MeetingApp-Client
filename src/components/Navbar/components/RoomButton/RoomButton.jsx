@@ -8,15 +8,12 @@ import mainStyles from '../../Navbar.css';
 
 
 class RoomButton extends Component {
-
     render() {
-        if (this.props.profile.isLoggedIn) {
-            if (this.props.history.location.pathname === '/rooms') {
-                return <button className={'button '+mainStyles.roomsButton} onClick={() => this.props.history.push('/')}><FontAwesomeIcon icon="home" /></button>;
-            }
-            return <button className={'button '+mainStyles.roomsButton} onClick={() => this.props.history.push('/rooms')}><FontAwesomeIcon icon="calendar-minus" /></button>;
-        }
-        return null;
+        let { profile, history } = this.props;
+        let pathname = history.location.pathname;
+        let isLoggedIn = profile.isLoggedIn;
+        let isActive = isLoggedIn && history.location.pathname === '/';
+        return isActive && <button className={'button ' + mainStyles.roomsButton} onClick={() => this.props.history.push('/rooms')}><FontAwesomeIcon icon="calendar-minus" /></button>;
 
     }
 }

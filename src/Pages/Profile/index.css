@@ -1,7 +1,20 @@
-:local(.profile-img){
+:local(.profileImg){
     display: block;
     width: 100%;
     height: auto;
-    max-width: 500px;
+    max-width: 300px;
     max-height: 500px;
+}
+
+:local(.profileUser){
+    margin-top: 100px;
+}
+
+:local(.resetButton){
+    padding: 10px;
+    margin-top: 20px;
+}
+
+:local(.userEmail){
+    margin-top: 20px;
 }

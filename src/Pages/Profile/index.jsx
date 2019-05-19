@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { profile } from '../../actions/profileActions';
+import Navbar from '../../components/Navbar';
 import profileStyles from './index.css';
 class Profile extends Component {
     componentDidMount() {
@@ -19,10 +20,13 @@ class Profile extends Component {
     render() {
         return (
             <div className="main-content">
+                <Navbar history={this.props.history} />
                 <div className="container">
-                    <img className={profileStyles.image} src={this.props.profile.profilePhoto} alt="" />
-                    <div>{this.props.profile.email}</div>
-                    <button className={'button'}>Reset Password</button>
+                    <div className={profileStyles.profileUser}>
+                        <img className={profileStyles.profileImg} src={this.props.profile.profilePhoto} alt="" />
+                        <div className={profileStyles.userEmail}>{this.props.profile.email}</div>
+                        <button className={'button '+profileStyles.resetButton}>Reset Password</button>
+                    </div>
                 </div>
             </div>
         );

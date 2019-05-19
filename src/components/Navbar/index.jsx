@@ -8,6 +8,7 @@ import LogButton from './components/LogButton/logButton';
 import RegButton from './components/RegButton/';
 import ModalButton from './components/ModalButton/ModalButton';
 import RoomButton from './components/RoomButton/RoomButton';
+import HomeButton from './components/HomeButton/';
 import mainStyles from './Navbar.css';
 
 
@@ -21,6 +22,7 @@ class Navbar extends Component {
     render() {
         return (
             <div className={mainStyles.navbar}>
+                <HomeButton profile={this.props.profile} logout={this.logout} history={this.props.history} />
                 <RoomButton profile={this.props.profile} history={this.props.history} />
                 { this.props.profile.isLoggedIn &&
                 <div className={mainStyles.profile}>
