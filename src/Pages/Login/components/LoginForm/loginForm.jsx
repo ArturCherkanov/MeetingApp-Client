@@ -26,7 +26,7 @@ class LoginForm extends Component {
                     <Input id="password" name='password' type="password" value={this.state.password} placeholder="Password:" onChange={e => this.setState({ password: e.target.value })} className="default-input" validations={[required]} />
                     <Button className="button register-button">{this.props.buttonName}</Button>
                 </Form>
-                <a className={'button ' + loginFormStyles.vkButton} href="https://oauth.vk.com/authorize?client_id=6995323&display=page&redirect_uri=http://localhost:3000/vk/&scope=friends&response_type=code&v=5.95">VK</a>
+                <a className={'button ' + loginFormStyles.vkButton} href="https://oauth.vk.com/authorize?client_id=6995323&display=page&redirect_uri=http://localhost/vk&scope=friends&response_type=code&v=5.95">VK</a>
             </>
         );
     }
