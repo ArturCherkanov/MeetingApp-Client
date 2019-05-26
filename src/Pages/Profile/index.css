@@ -2,8 +2,7 @@
     display: block;
     width: 100%;
     height: auto;
-    max-width: 300px;
-    max-height: 500px;
+
 }
 
 :local(.profileUser){
@@ -17,4 +16,32 @@
 
 :local(.userEmail){
     margin-top: 20px;
+}
+
+:local(.profileRe){
+    background: red;
+    position: relative;
+    height: 100px;
+    width: 100px;
+}
+
+:local(.imgContainer){
+    position: relative;
+    max-width: 300px;
+    max-height: 500px;
+}
+
+:local(.imgContainer:hover>.editImage){
+    opacity: 1;
+}
+
+:local(.editImage){
+    position: absolute;
+    opacity: 0;
+    transition: 1s all;
+    top: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

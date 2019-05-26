@@ -7,6 +7,7 @@ import HomePage from './Pages/Home';
 import RegistationPage from './Pages/Registration';
 import Login from './Pages/Login';
 import Rooms from './Pages/Meetings';
+import VkAuth from './Pages/Login/components/vkAuth/vkAuth';
 import Profile from './Pages/Profile';
 import { isToken } from './actions/profileActions';
 import { getEventsFromDb } from './actions/eventsActions';
@@ -33,6 +34,7 @@ class App extends Component {
                     <Route path='/login' component={Login} />
                     <Route path='/rooms' component={Rooms} />
                     <Route path='/profile' component={Profile} />
+                    <Route path='/vk' component={VkAuth} />
                 </>
             </Router>
         );

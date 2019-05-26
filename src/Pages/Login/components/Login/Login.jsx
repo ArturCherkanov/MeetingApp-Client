@@ -24,7 +24,7 @@ class Login extends Component {
                 <div className="container">
                     <div className={mainStyles.formContainer}>
                         <h1 className="d-block">Login</h1>
-                        <LoginForm buttonName={'Login'} submitFunction={this.authActions} />
+                        <LoginForm buttonName={'Login'} history={this.props.history} submitFunction={this.authActions} />
                     </div>
                 </div>
             </div>

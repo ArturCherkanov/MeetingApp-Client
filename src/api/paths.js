@@ -12,6 +12,7 @@ export const USER_LIST = 'list/';
 
 // Auth
 export const AUTH_PATH = '/auth/';
+export const VK_PATH = 'vk';
 
 //Room
 export const ROOM_PATH = '/rooms/';

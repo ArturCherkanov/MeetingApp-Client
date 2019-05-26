@@ -25,3 +25,12 @@
     padding: 10px 20px;
     margin-top: 10px;
   }
+
+  :local(.vkButton){
+    background: #2196f3;
+    color: #fff;
+    font-weight: 800;
+    border-radius: 50%!important;
+    margin-top: 15px;
+    padding: 10px;
+  }

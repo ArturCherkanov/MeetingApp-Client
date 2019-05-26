@@ -8,6 +8,7 @@ import {
     ROOM_PATH,
     VALIDATE_PATH,
     AUTH_PATH,
+    VK_PATH,
     IMAGE_PATH,
 } from './paths';
 
@@ -15,6 +16,12 @@ import {
 
 export const addUserToDB = (userData) => (
     post(API_PATH + AUTH_PATH, false, userData)
+);
+
+export const vkAuth = (data) => (
+    post(API_PATH + AUTH_PATH + VK_PATH, false,   {
+        code: data,
+    },)
 );
 
 export const findUserInDB = (username, password) => (
