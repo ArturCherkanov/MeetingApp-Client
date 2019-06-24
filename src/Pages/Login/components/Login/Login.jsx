@@ -14,6 +14,7 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            error: false,
         };
     }
 
@@ -24,7 +25,8 @@ class Login extends Component {
                 <div className="container">
                     <div className={mainStyles.formContainer}>
                         <h1 className="d-block">Login</h1>
-                        <LoginForm buttonName={'Login'} history={this.props.history} submitFunction={this.authActions} />
+                        {this.state.error && (<div className={mainStyles.errorContainer}>You creadentials are not valid!</div>)}
+                        <LoginForm buttonName={'Login'} error={this.state.error} history={this.props.history} login={this.login} />
                     </div>
                 </div>
             </div>
@@ -32,13 +34,14 @@ class Login extends Component {
     }
     /*-----------СUSTOM METHODS-----------*/
 
-    authActions = (e, username, password) => {
+    login = (e, username, password) => {
         e.preventDefault();
         findUserInDB(username, password)
             .then(res =>
                 localStorage.setItem('token', res.data.token))
-            .then(() => this.props.checkTokenFunction())
-            .then(() => this.props.history.push('/'));
+            .then(() => this.props.checkToken())
+            .then(() => this.props.history.push('/'))
+            .catch((err) => { this.setState({ error: true }); })
     }
 
     /*-----------END СUSTOM METHODS-----------*/
@@ -49,12 +52,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    checkTokenFunction: () => {
+    checkToken: () => {
         dispatch(profile());
     },
 });
 Login.propTypes = {
-    checkTokenFunction: PropTypes.func,
+    checkToken: PropTypes.func,
 };
 
 

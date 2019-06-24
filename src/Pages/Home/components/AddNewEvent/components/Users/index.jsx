@@ -73,7 +73,7 @@ const mapStateToProps = (state) => ({
 
 Users.propTypes = {
     profile: PropTypes.object,
-    setUsers: PropTypes.array,
+    setUsers: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

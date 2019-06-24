@@ -26,6 +26,12 @@
     margin-top: 10px;
   }
 
+  .register-button:disabled{
+    background-color: #6d6d6d;
+    color: #b8b4b4;
+    cursor: no-drop;
+  }
+
   :local(.vkButton){
     background: #2196f3;
     color: #fff;
@@ -33,4 +39,13 @@
     border-radius: 50%!important;
     margin-top: 15px;
     padding: 10px;
+  }
+
+  :local(.errorContainer){
+    border-bottom: 2px solid #a56767;
+    padding: 10px 20px;
+    background: #f7f0f0;
+    color: #3f4257;
+    border-radius: 2px;
+    margin-bottom: 20px;
   }

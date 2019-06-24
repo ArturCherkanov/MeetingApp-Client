@@ -21,7 +21,7 @@ class LoginForm extends Component {
     render() {
         return (
             <>
-                <Form className="register-form" onSubmit={e => this.props.submitFunction(e, this.state.username, this.state.password)}>
+                <Form className="register-form" onSubmit={e => this.props.login(e, this.state.username, this.state.password)}>
                     <Input id="email" className="default-input" value={this.state.username} placeholder="Email:" onChange={e => this.setState({ username: e.target.value })} validations={[required, email]} name="username" />
                     <Input id="password" name='password' type="password" value={this.state.password} placeholder="Password:" onChange={e => this.setState({ password: e.target.value })} className="default-input" validations={[required]} />
                     <Button className="button register-button">{this.props.buttonName}</Button>
@@ -33,7 +33,7 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-    submitFunction: PropTypes.func,
+    login: PropTypes.func,
     buttonName: PropTypes.string,
 };
 

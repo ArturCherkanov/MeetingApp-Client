@@ -11,18 +11,18 @@ class Rooms extends Component {
             rooms: [],
         };
     }
-    getRooms = () => {
-        getFreeRooms(this.props.validationDates)
-            .then(res => { this.setState({ rooms: res.data }); });
-    }
+    // getRooms = () => {
+    //     getFreeRooms(this.props.validationDates)
+    //         .then(res => { this.setState({ rooms: res.data }); });
+    // }
 
     componentDidMount() {
-        this.getRooms();
+        // this.getRooms();
     }
     render() {
         return (
             <>
-                <RoomList room={this.props.room} setRoom={this.props.setRoom} rooms={this.state.rooms}/>
+                <RoomList room={this.props.room} setRoom={this.props.setRoom} roomList={this.props.roomList}/>
             </>
         );
     }

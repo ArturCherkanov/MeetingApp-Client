@@ -93,7 +93,7 @@ class AddNewEvent extends Component {
                 this.state.room,
                 this.state.users,
             );
-            this.props.setModalStateFunction(false);
+            this.props.setModalState(false);
             const socket = openSocket(IP_PATH);
             socket.emit('sendUsers', {
                 users: this.state.users,
@@ -105,7 +105,7 @@ class AddNewEvent extends Component {
 
 
         return (
-            <div className={'addNewEvent ' + (this.props.active ? ' active' : ' disabled')}>
+            <div className={'addNewEvent ' + (  this.props.active ? ' active' : ' disabled')}>
                 <form className="addNewEvent-form">
                     <div className="addNewEvent-form-container">
                         <label className="addNEwEvent-Label">
@@ -169,7 +169,7 @@ class AddNewEvent extends Component {
 
     modalClose = (e) => {
         e.preventDefault();
-        this.props.setModalStateFunction(false);
+        this.props.setModalState(false);
     }
 
     /*-----------END CUSTOM METHODS-----------*/
@@ -177,14 +177,14 @@ class AddNewEvent extends Component {
 }
 
 AddNewEvent.propTypes = {
-    setModalStateFunction: PropTypes.func,
+    setModalState: PropTypes.func,
     active: PropTypes.bool,
     addEvent: PropTypes.func,
     eventList: PropTypes.object,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    setModalStateFunction: state => {
+    setModalState: state => {
         dispatch(modalAction(state));
     },
     update: state => {

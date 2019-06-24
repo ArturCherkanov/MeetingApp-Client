@@ -1,4 +1,4 @@
-import { getUser } from '../api';
+import { getUser, updateUser, imageUpdate } from '../api';
 
 export const profile = () => dispatch => {
     getUser()
@@ -17,5 +17,26 @@ export const profile = () => dispatch => {
         });
 };
 
+export const updateProfile = (params) => dispatch => {
+    updateUser(params)
+        .then((res) => {
+            dispatch({
+                type: 'PROFILE_UPDATE',
+                payload: res.data
+
+            })
+        })
+}
+
+export const updateImage = (params) => dispatch => {
+    imageUpdate(params)
+        .then((res) => {
+            dispatch({
+                type: 'IMAGE_UPDATE',
+                payload: res.data
+
+            })
+        })
+}
 
 

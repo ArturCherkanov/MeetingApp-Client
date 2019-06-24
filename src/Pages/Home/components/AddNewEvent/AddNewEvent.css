@@ -64,7 +64,9 @@
     width: 100%;
     max-width: 500px;
   }
-
+  .date-picker-container{
+    display: flex;
+  }
   .add-me-button{
     background: none;
     border: none;

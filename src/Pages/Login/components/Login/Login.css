@@ -20,3 +20,12 @@
   :local(.formContainer>h1){
     font-weight: normal;
   }
+  
+  :local(.errorContainer){
+    border-bottom: 2px solid #a56767;
+    padding: 10px 20px;
+    background: #f7f0f0;
+    color: #3f4257;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }

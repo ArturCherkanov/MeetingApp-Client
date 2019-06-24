@@ -19,3 +19,7 @@
     overflow: hidden;
     width: 290px;
   }
+:local(.edit){
+  padding: 10px;
+  padding-right: 0;
+}

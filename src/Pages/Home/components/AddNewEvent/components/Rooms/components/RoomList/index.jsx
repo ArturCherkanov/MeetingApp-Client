@@ -12,7 +12,7 @@ class RoomList extends Component {
             <>
                 <select className="default-input" value={this.props.room} onChange={e => { this.props.setRoom('room', e.target.value); }}>
                     <option></option>
-                    {this.props.rooms.length !== 0 && this.props.rooms.map((room, i) => (
+                    {this.props.roomList.length !== 0 && this.props.roomList.map((room, i) => (
                         <Room key={i} name={room} />
                     ))}
                 </select>

@@ -81,6 +81,30 @@ h2{
   font-size: 32px;
   margin-right: 20px;
 }
+.default-button {
+  color: #fff;
+  background: #1087ff;
+  position: relative;
+  border: none;
+  display: inline-block;
+  font-size: 15px;
+  padding: 5px 10px;
+}
+a.default-button{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+a.default-button>*{
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  left: 0;;
+}
+
+.check-event-button{
+  margin: 20px 0 20px auto;
+
+}
 .create-button{
   color: #fff;
   background: #42ca9d;

@@ -11,9 +11,12 @@ class NotificationAlert extends Component {
         audio.play();
         audio.autoplay =false;
 
-        setTimeout(() => { this.props.showNotificationAction(false); }, 6000);
+        setTimeout(() => { this.props.showNotificationAction(false); }, 90000);
         return (
+            <>
             <div className={NotificationStyles.alert}>{this.props.notification.msg}</div>
+<a href={this.props.notofication.href}>Add To Foofle Calendar</a>
+</>
         );
     }
 }

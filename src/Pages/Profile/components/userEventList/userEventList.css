@@ -1,0 +1,8 @@
+:local(.eventListContainer){
+    display: flex;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    background: #f7f0f0;
+    color: #6d6d6d;
+}

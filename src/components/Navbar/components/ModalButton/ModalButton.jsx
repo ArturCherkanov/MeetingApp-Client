@@ -10,7 +10,7 @@ class ModalButton extends Component {
 
     render() {
         // if (this.props.profile.token) {
-        //     return <div className={mainStyles.addEvent} onClick={(e) => { e.preventDefault(); this.props.setModalStateFunction(true); }}>+</div>;
+        //     return <div className={mainStyles.addEvent} onClick={(e) => { e.preventDefault(); this.props.setModalState(true); }}>+</div>;
         // }
         return null;
     }
@@ -26,7 +26,7 @@ const mapStateToProps = (state) => ({
 });
 ModalButton.propTypes = {
     profile: PropTypes.bool,
-    setModalStateFunction: PropTypes.func,
+    setModalState: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalButton);

@@ -1,0 +1,6 @@
+:local(.editContainer){
+    display: flex;  
+    min-width: 70px;
+    justify-content: space-between;
+    margin-left: 10px;
+}

@@ -15,7 +15,7 @@ class RegistrationContainer extends Component {
                 <div className="container">
                     <div className={mainStyles.formContainer}>
                         <h1 className="d-block">Registration</h1>
-                        <RegistrationForm buttonName={'Registration'} submitFunction={this.createUser} />
+                        <RegistrationForm buttonName={'Registration'} submit={this.createUser} />
                     </div>
                 </div>
             </div>

@@ -5,9 +5,9 @@
 
 }
 
-:local(.profileUser){
+/* :local(.profileUser){
     margin-top: 100px;
-}
+} */
 
 :local(.resetButton){
     padding: 10px;
@@ -44,4 +44,20 @@
     cursor: pointer;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+:local(.profileContainer){
+    display: flex !important;
+    margin-top: 100px !important;
+    
+}
+
+:local(.profileContainer>*){
+    flex: 1 0 50%;
+}
+
+:local(.editUserForm>*){
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
 }

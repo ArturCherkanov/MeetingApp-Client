@@ -9,10 +9,6 @@ class EventListItem extends Component {
         return (
             <li className={mainStyles.eventItem} data-value={this.props.event}>
                 <span>Start at:{this.props.event.timeFrom + ' / ' + this.props.event.name}</span>
-                <FontAwesomeIcon icon="edit" onClick={() => {
-                    this.props.setModalState(true);
-                    this.props.setEditableEvent(this.props.event);
-                }} />
             </li>
         );
     }

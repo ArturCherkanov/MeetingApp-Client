@@ -33,7 +33,7 @@ class EventList extends Component {
                 <input className={'default-input ' + mainStyles.eventListSearch} type="search" placeholder="Search" onChange={this.handleSearchInputChange} />
                 <ul className={mainStyles.eventList}>
                     {visibleItems && visibleItems.map(elem => (
-                        <EventListItem event={elem} setModalState={this.props.setModalStateFunction} setEditableEvent={this.props.setEditableEvent} key={elem._id} />
+                        <EventListItem event={elem} setModalState={this.props.setModalState} setEditableEvent={this.props.setEditableEvent} key={elem._id} />
                     ))}
                 </ul>
                 {/* <span className={mainStyles.viewAll} onClick={this.refresh}>Refresh</span> */}
@@ -104,7 +104,7 @@ const mapDispatchToProps = dispatch => ({
     // update: state => {
     //     dispatch(refresh(state));
     // },
-    setModalStateFunction: state => {
+    setModalState: state => {
         dispatch(modalAction(state));
     },
     setEditableEvent: state => {
@@ -128,7 +128,7 @@ EventList.propTypes = {
     // refresh: PropTypes.bool,
     update: PropTypes.func,
     getEventsFromDb: PropTypes.func,
-    setModalStateFunction: PropTypes.func,
+    setModalState: PropTypes.func,
     setEditableEvent: PropTypes.func,
 };
 

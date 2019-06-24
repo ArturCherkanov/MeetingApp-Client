@@ -26,6 +26,7 @@ class MainContent extends Component {
         this.state = {
             data: [],
             eventList: this.data,
+            
         };
     }
 
@@ -34,7 +35,7 @@ class MainContent extends Component {
         let token = localStorage.getItem('token');
         if (token) {
             this.props.getRoomList();
-            const socket = openSocket(API_PATH);
+            const socket = openSocket('http://localhost:3001');
             socket.emit('join', { token: token });
             socket.on('sendNotification', (req) => {
                 this.props.notificationAction(req);
@@ -43,7 +44,7 @@ class MainContent extends Component {
     }
 
     activateWindow = () => {
-        this.props.setModalStateFunction(true);
+        this.props.setModalState(true);
     }
 
     closeWindow = (test) => {
@@ -94,7 +95,7 @@ class MainContent extends Component {
                         <EventList handleSearch={this.handleSearch} chosenEventOnCaledar={this.state.selectedDate} />
                     </div>
                 </div>
-                {this.props.profile ? (<AddNewEvent />) : (null)}
+                {this.props.modalState ? (<AddNewEvent />) : (null)}
                 {this.props.notification.active ? (<Notification />) : (null)}
             </div>
         );
@@ -102,7 +103,7 @@ class MainContent extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setModalStateFunction: state => {
+    setModalState: state => {
         dispatch(modalAction(state));
     },
     getEventsByDate: (state) => {
@@ -130,7 +131,7 @@ const mapStateToProps = (state) => ({
 });
 
 MainContent.propTypes = {
-    setModalStateFunction: PropTypes.func,
+    setModalState: PropTypes.func,
     eventList: PropTypes.array,
     profile: PropTypes.bool,
     getRoomList: PropTypes.func,

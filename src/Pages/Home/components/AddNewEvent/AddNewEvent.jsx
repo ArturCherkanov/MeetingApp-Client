@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import moment, { calendarFormat } from 'moment';
 import PropTypes from 'prop-types';
 import openSocket from 'socket.io-client';
 import DateTimePicker from 'react-datetime-picker';
@@ -10,7 +10,8 @@ import Rooms from './components/Rooms/';
 import { modalAction } from '../../../../actions/modalActions';
 import { addDataToDb } from '../../../../actions/eventsActions';
 import { error, required, approveSending } from '../../../../utils/validation';
-import {IP_PATH} from '../../../../api/paths';
+import { IP_PATH } from '../../../../api/paths';
+import { getFreeRooms } from '../../../../api/';
 
 // Need to split by components
 import './AddNewEvent.css';
@@ -22,10 +23,11 @@ class AddNewEvent extends Component {
         this.state = {
             message: undefined,
             minDate: new Date(),
-            maxDate: new Date(),
+            maxDate: moment(new Date()).add(15, 'minutes')._d,
             name: undefined,
             room: undefined,
             users: undefined,
+            roomList: '',
         };
     }
 
@@ -42,6 +44,7 @@ class AddNewEvent extends Component {
                 from: minISOdate,
                 to: maxtISOdate,
             },
+            roomList: '',
             room: room,
             name: name,
             users: users,
@@ -52,6 +55,12 @@ class AddNewEvent extends Component {
 
     }
 
+    // cleanForm = (formData) => {
+    //     formData.map((i, e) => {
+    //         !(minDate || maxDate)?
+    //         this.makeInputHandler(e, ''):
+    //     })
+    // }
     setUsers = (userList) => {
         if (userList.length !== 0) {
             this.makeInputHandler('users', userList);
@@ -93,7 +102,7 @@ class AddNewEvent extends Component {
                 this.state.room,
                 this.state.users,
             );
-            this.props.setModalStateFunction(false);
+            this.props.setModalState(false);
             const socket = openSocket(IP_PATH);
             socket.emit('sendUsers', {
                 users: this.state.users,
@@ -101,9 +110,11 @@ class AddNewEvent extends Component {
                 name: this.state.name,
             });
         };
+        console.log(this.state.maxDate);
+        console.log(new Date());
 
         return (
-            <div className={'addNewEvent ' + (this.props.active ? ' active' : ' disabled')}>
+            <div className={'addNewEvent active'}>
                 <form className="addNewEvent-form">
                     <div className="addNewEvent-form-container">
                         <label className="addNEwEvent-Label">
@@ -120,27 +131,32 @@ class AddNewEvent extends Component {
                             <textarea className="default-input" placeholder="Notes:" onChange={e => { this.makeInputHandler('message', e.target.value); }}></textarea>
                         </label>
 
-                        <div>
+                        <div className='date-picker-container'>
                             <DateTimePicker
-                                onChange={(date) => { this.makeInputHandler('minDate', date); }}
+                                onChange={(date) => { this.makeInputHandler('minDate', date); console.log(this); }}
                                 value={this.state.minDate}
-                                minDate={new Date()}
+                                minDate={this.state.minDate}
                             />
                             <DateTimePicker
                                 onChange={(date) => { this.makeInputHandler('maxDate', date); }}
                                 value={this.state.maxDate}
-                                minDate={this.state.minDate}
+                                minDate={this.state.maxDate}
                             />
-                            {
-                                this.state.maxDate && this.state.minDate &&
-                                <label className="addNEwEvent-Label">
-                                    <Rooms validationDates={{
-                                        userFrom: this.state.minDate,
-                                        userTo: this.state.maxDate,
-                                    }} room={this.state.room} setRoom={this.makeInputHandler} />
-                                </label>
-                            }
                         </div>
+                        <button className={'default-button check-event-button'} onClick={(e) => {
+                            e.preventDefault()
+                            getFreeRooms({
+                                userFrom: this.state.minDate,
+                                userTo: this.state.maxDate,
+                            })
+                                .then(res => { this.setState({ roomList: res.data }); console.log(res.data) });
+                        }}>Check Rooms</button>
+                        {
+                            // this.state.maxDate && this.state.minDate &&
+                            <label className="addNEwEvent-Label">
+                                <Rooms roomList={this.state.roomList} room={this.state.room} setRoom={this.makeInputHandler} />
+                            </label>
+                        }
                         <div className="addNEwEvent-button-container">
                             <button disabled={!isApprovedSending} className={'button ' + !isApprovedSending ? 'button disable-button' : 'button addNewEvent-create-button'} onClick={(e) => { handleRequest(e); }}>CREATE</button>
                             <button className="button addNewEvent-cancel-button" onClick={this.modalClose}>Cancel</button>
@@ -156,7 +172,7 @@ class AddNewEvent extends Component {
 
     modalClose = (e) => {
         e.preventDefault();
-        this.props.setModalStateFunction(false);
+        this.props.setModalState(false);
     }
 
     /*-----------END CUSTOM METHODS-----------*/
@@ -164,14 +180,14 @@ class AddNewEvent extends Component {
 }
 
 AddNewEvent.propTypes = {
-    setModalStateFunction: PropTypes.func,
+    setModalState: PropTypes.func,
     active: PropTypes.bool,
     addEvent: PropTypes.func,
     eventList: PropTypes.object,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    setModalStateFunction: state => {
+    setModalState: state => {
         dispatch(modalAction(state));
     },
     // update: state => {
