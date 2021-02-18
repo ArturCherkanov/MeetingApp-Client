@@ -1,4 +1,4 @@
-import { getEvents } from '../../../api';
+import { getEvents } from '../api';
 
 export const getDataFromDb = (date) => dispatch => {
     getEvents(date)

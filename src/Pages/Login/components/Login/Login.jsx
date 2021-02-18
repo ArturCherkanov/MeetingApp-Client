@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import LoginForm from '../../../../components/LoginForm/LoginForm';
-import { addUserToDB } from '../../../../api/'
+import LoginForm from '../LoginForm/loginForm';
+import { findUserInDB } from '../../../../api/';
+import { isToken } from '../../../../actions/isTokenAction';
 
-import mainStyles from './Login.css'
+import mainStyles from './Login.css';
 
-class Registation extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password: ''
-        }
+            password: '',
+        };
+    }
+
+    UNSAFE_componentWillMount() {
+        // this.props.checkTokenFunction()
+        // if (this.props.isToken) { this.props.history.push('/')}
     }
     render() {
         return (
@@ -30,10 +37,27 @@ class Registation extends Component {
 
     findUser = (e, username, password) => {
         e.preventDefault();
-        
+        findUserInDB(username, password)
+            .then(res => localStorage.setItem('token', res.data.token))
+            .then(() => this.props.checkTokenFunction())
+            // .then(() => this.props.history.push('/'));
     }
 
     /*-----------END СUSTOM METHODS-----------*/
 }
 
-export default connect()(Registation);
+const mapStateToProps = (state) => ({
+    isToken: state.isToken,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    checkTokenFunction: () => {
+        dispatch(isToken());
+    },
+});
+Login.propTypes = {
+    checkTokenFunction: PropTypes.func,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

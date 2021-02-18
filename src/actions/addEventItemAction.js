@@ -1,20 +1,23 @@
-import { getEvents, putEvent } from '../api/index'
+import { getEvents, putEvent } from '../api/';
 
 
-export const addDataToDb = (message, time) => dispatch => {
+export const addDataToDb = (message, time, isAsyncLoadEvents) => dispatch => {
 
     dispatch({ type: 'ADD_EVENTITEM_REQUEST' });
-    
-    putEvent(message, time).then(() => getEvents()
-        .then(res => res.data.data)
+
+    putEvent(message, time, isAsyncLoadEvents)
+        .then(res => res.data)
         .then(res => {
+            // let event = {};
+            // event[res.date] = res.event;
             dispatch({
-                type: "ADD_EVENTITEM_SUCCESS",
-                payload: res
-            })
+                type: 'ADD_EVENTITEM_SUCCESS',
+                payload: res,
+            });
         })
         .catch(err => dispatch({
-            type:"ADD_EVENTITEM_ERROR",
-            payload: err
-    })))
-}
+            type: 'ADD_EVENTITEM_ERROR',
+            payload: err,
+        })
+        );
+};
